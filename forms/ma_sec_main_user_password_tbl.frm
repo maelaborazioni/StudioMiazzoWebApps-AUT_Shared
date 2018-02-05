@@ -1,0 +1,15 @@
+dataSource:"db:/svy_framework/sec_user_password",
+extendsID:"4A4784D4-5A36-4B7B-9FE4-C2B092CF0589",
+items:[
+{
+height:480,
+partType:5,
+typeid:19,
+uuid:"711019C8-BFF4-43BC-AA7F-F52CA23A5939"
+}
+],
+name:"ma_sec_main_user_password_tbl",
+size:"360,480",
+styleName:"leaf_style",
+typeid:3,
+uuid:"95E7DDFF-1820-458A-8D3E-2F3D27C9E6C2"

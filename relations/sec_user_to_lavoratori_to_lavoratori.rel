@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/ma_anagrafiche/lavoratori",
+items:[
+{foreignColumnName:"idlavoratore",primaryDataProviderID:"idlavoratore",typeid:23,uuid:"BA59E50D-EC15-4756-BDB3-8F435AB250E0"}
+],
+joinType:1,
+name:"sec_user_to_lavoratori_to_lavoratori",
+primaryDataSource:"db:/svy_framework/sec_user_to_lavoratori",
+typeid:22,
+uuid:"FFEFC665-1D84-4263-BAD6-153424A24533"

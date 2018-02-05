@@ -1,0 +1,9 @@
+foreignDataSource:"db:/svy_framework/sec_organization",
+items:[
+{foreignColumnName:"organization_id",primaryDataProviderID:"rp_group_id",typeid:23,uuid:"59AA4178-7C70-44B3-8E8A-0D2AC21987EA"}
+],
+joinType:1,
+name:"sec_organization_to_rp_group_to_sec_organization",
+primaryDataSource:"db:/svy_framework/sec_organization_to_rp_group",
+typeid:22,
+uuid:"90AF0245-2301-47CA-A1B8-A573CF68B9F4"

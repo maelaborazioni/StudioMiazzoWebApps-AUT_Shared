@@ -1,0 +1,8 @@
+allowCreationRelatedRecords:true,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/ma_framework/sec_filtriclassificazioni",
+joinType:1,
+name:"sec_filtriclassificazioni_to_sec_filtriclassificazioni",
+primaryDataSource:"db:/ma_framework/sec_filtriclassificazioni",
+typeid:22,
+uuid:"24C46EC3-8B1B-4CFE-B79F-E7892549D51F"

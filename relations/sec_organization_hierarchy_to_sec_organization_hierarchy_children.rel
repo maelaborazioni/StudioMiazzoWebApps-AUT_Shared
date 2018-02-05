@@ -1,0 +1,10 @@
+foreignDataSource:"db:/svy_framework/sec_organization_hierarchy",
+initialSort:"sec_organization_hierarchy_to_sec_organization.name asc",
+items:[
+{foreignColumnName:"parent_organization_id",primaryDataProviderID:"organization_id",typeid:23,uuid:"AC6A95F5-B68C-46CD-80E7-BC41666D6BE5"}
+],
+joinType:1,
+name:"sec_organization_hierarchy_to_sec_organization_hierarchy_children",
+primaryDataSource:"db:/svy_framework/sec_organization_hierarchy",
+typeid:22,
+uuid:"78F19BAD-587A-4825-BB74-CC12022BC26C"

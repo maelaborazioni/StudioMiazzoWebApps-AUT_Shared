@@ -1,0 +1,11 @@
+allowCreationRelatedRecords:true,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/ma_framework/sec_filtriclassificazioni",
+items:[
+{foreignColumnName:"security_key_id",operator:0,primaryDataProviderID:"security_key_id",typeid:23,uuid:"AEC62AA6-0C0D-4082-93CF-CD968962A307"}
+],
+joinType:1,
+name:"sec_security_key_to_sec_filtriclassificazioni",
+primaryDataSource:"db:/svy_framework/sec_security_key",
+typeid:22,
+uuid:"569BAE6B-CC82-4194-B36E-29191496A9E1"

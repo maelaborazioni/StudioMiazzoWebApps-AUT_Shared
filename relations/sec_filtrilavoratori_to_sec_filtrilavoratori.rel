@@ -1,0 +1,8 @@
+allowCreationRelatedRecords:true,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/ma_framework/sec_filtrilavoratori",
+joinType:1,
+name:"sec_filtrilavoratori_to_sec_filtrilavoratori",
+primaryDataSource:"db:/ma_framework/sec_filtrilavoratori",
+typeid:22,
+uuid:"46B34F37-8E12-4890-921E-98C80C077A64"

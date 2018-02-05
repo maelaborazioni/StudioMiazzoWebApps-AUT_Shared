@@ -1,0 +1,383 @@
+dataSource:"db:/svy_framework/sec_organization_hierarchy",
+extendsID:"-1",
+items:[
+{
+dataProviderID:"parent_organization_id",
+displayType:2,
+editable:false,
+location:"260,60",
+onDataChangeMethodID:"80415AB3-87DE-4440-A2C1-DCF343E1E689",
+size:"240,20",
+typeid:4,
+uuid:"02127115-BE76-4F54-97E9-DBEDB4DD7B9A",
+valuelistID:"83B29EB6-17D6-41CD-96AE-230A9C5FC1C8"
+},
+{
+anchors:11,
+borderType:"SpecialMatteBorder,0.0,0.0,1.0,1.0,#000000,#000000,#336699,#336699,0.0,",
+items:[
+{
+containsFormID:"F7343E19-DFE4-46FC-A45B-58859B162C2C",
+location:"729,24",
+text:"i18n:svy.fr.lbl.groups",
+typeid:15,
+uuid:"5714C4AB-510D-4683-A9A3-D8959D41467A"
+}
+],
+location:"620,0",
+name:"tab_groups",
+printable:false,
+size:"360,85",
+tabOrientation:-1,
+transparent:true,
+typeid:16,
+uuid:"03D986A1-FAE8-4DE8-A608-00B8A1E952FB"
+},
+{
+anchors:12,
+imageMediaID:"A96F220E-49EF-4C67-AFE7-5AA83EFE59AC",
+location:"220,465",
+name:"l",
+onActionMethodID:"A5306830-664F-4C15-87EB-32384C6B3C46",
+rolloverCursor:12,
+showClick:false,
+size:"30,30",
+toolTipText:"Visualizza l'organigramma",
+typeid:7,
+uuid:"04E23BEF-7927-4408-8AF4-862B1F760021"
+},
+{
+imageMediaID:"C98C711F-AAB5-482B-B0FF-2C8D1A6908B1",
+location:"260,240",
+mediaOptions:2,
+name:"btn_add_user",
+onActionMethodID:"5A9C1EB8-8340-4BF3-BD3C-608370F92F34",
+onRenderMethodID:"-1",
+rolloverCursor:12,
+showClick:false,
+showFocus:false,
+size:"30,30",
+toolTipText:"i18n:svy.fr.lbl.add",
+typeid:7,
+uuid:"08DF00BF-781E-49DE-B1E5-A7082F61E325"
+},
+{
+formIndex:13807,
+location:"525,0",
+text:"Login enabled",
+transparent:true,
+typeid:7,
+uuid:"0A4B518E-AA0D-4809-A942-9A99597A87E3"
+},
+{
+customProperties:"methods:{\
+onActionMethodID:{\
+arguments:[\
+null,\
+null,\
+\"'AUT_Lkp_Organization'\",\
+null,\
+\"'filterRpGroups'\",\
+null,\
+null,\
+null,\
+\"true\",\
+null,\
+null,\
+\"true\",\
+\"'updateRpGroups'\"\
+]\
+}\
+}",
+imageMediaID:"C98C711F-AAB5-482B-B0FF-2C8D1A6908B1",
+location:"260,90",
+mediaOptions:2,
+name:"btn_add_rp_group",
+onActionMethodID:"09683411-0331-4A08-BF5E-656611194522",
+onRenderMethodID:"-1",
+rolloverCursor:12,
+showClick:false,
+showFocus:false,
+size:"30,30",
+toolTipText:"Aggiungi ruolo osservatori",
+typeid:7,
+uuid:"28A11504-1CCC-4AB8-B873-87362320577D"
+},
+{
+anchors:9,
+imageMediaID:"53C5F52B-EB39-42BC-ABA4-C34356BF10CB",
+location:"691,240",
+mediaOptions:2,
+name:"btn_add_by_group",
+onActionMethodID:"9FEC8119-5D36-4E73-8728-35130A3AE53C",
+rolloverCursor:12,
+showClick:false,
+showFocus:false,
+size:"30,30",
+toolTipText:"Aggiungi chiavi per categoria gruppo ",
+typeid:7,
+uuid:"2CE9CA70-2BBC-470F-A522-E9EF8C9867C4"
+},
+{
+location:"260,40",
+size:"240,20",
+text:"i18n:ma.sec.lbl.parent",
+transparent:true,
+typeid:7,
+uuid:"2FCBAA10-0923-4F94-AE3B-68DC981CF9D4"
+},
+{
+anchors:13,
+beanClassName:"com.servoy.extensions.beans.dbtreeview.DBTreeView",
+beanXML:"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\
+<java version=\"1.7.0_25\" class=\"java.beans.XMLDecoder\">\
+ <object class=\"com.servoy.extensions.beans.dbtreeview.DBTreeView\">\
+  <void property=\"background\">\
+   <object class=\"java.awt.Color\">\
+    <int>255<\/int>\
+    <int>255<\/int>\
+    <int>255<\/int>\
+    <int>255<\/int>\
+   <\/object>\
+  <\/void>\
+  <void property=\"borderType\">\
+   <object class=\"com.servoy.j2db.util.gui.SpecialMatteBorder\">\
+    <float>0.0<\/float>\
+    <float>0.0<\/float>\
+    <float>0.0<\/float>\
+    <float>1.0<\/float>\
+    <object class=\"java.awt.Color\" id=\"Color0\">\
+     <int>0<\/int>\
+     <int>0<\/int>\
+     <int>0<\/int>\
+     <int>255<\/int>\
+    <\/object>\
+    <object idref=\"Color0\"/>\
+    <object idref=\"Color0\"/>\
+    <object class=\"java.awt.Color\">\
+     <int>67<\/int>\
+     <int>67<\/int>\
+     <int>67<\/int>\
+     <int>255<\/int>\
+    <\/object>\
+   <\/object>\
+  <\/void>\
+  <void property=\"transparent\">\
+   <boolean>false<\/boolean>\
+  <\/void>\
+ <\/object>\
+<\/java>\
+",
+location:"0,0",
+name:"organization_hierarchy",
+size:"250,460",
+typeid:12,
+uuid:"5F43364E-871B-41BE-ACEA-05449D80B0C4"
+},
+{
+dataProviderID:"sec_organization_hierarchy_to_sec_organization.name",
+location:"260,20",
+onDataChangeMethodID:"DD1D86BF-05EA-4B10-BB40-77C437B8C593",
+onRenderMethodID:"-1",
+size:"240,20",
+typeid:4,
+uuid:"6CADF1A9-1A10-46DB-8CDF-E3BF4A70597C"
+},
+{
+borderType:"SpecialMatteBorder,0.0,1.0,0.0,0.0,#000000,#336699,#000000,#000000,0.0,",
+items:[
+{
+containsFormID:"2CC0E4F6-F932-416E-A3FC-2F7591A920E3",
+location:"620,150",
+text:"ma_sec_main_rp_user_tbl",
+typeid:15,
+uuid:"8988E09F-A8C8-4867-ADE9-EF6F96514F4C"
+}
+],
+location:"620,120",
+name:"tab_rp_users",
+printable:false,
+size:"360,115",
+tabOrientation:-1,
+transparent:true,
+typeid:16,
+uuid:"83F0C36B-5FAB-4068-8033-D27BEA1BF4E2"
+},
+{
+location:"260,0",
+size:"240,20",
+text:"Nome",
+transparent:true,
+typeid:7,
+uuid:"8C731484-A8DA-4777-B56D-75FC6CCE5FD2"
+},
+{
+customProperties:"methods:{\
+onActionMethodID:{\
+arguments:[\
+null,\
+null,\
+\"'AUT_Lkp_User'\",\
+null,\
+\"'filterRpUsers'\",\
+null,\
+null,\
+null,\
+\"true\",\
+null,\
+null,\
+\"true\",\
+\"'updateRpUsers'\"\
+]\
+}\
+}",
+imageMediaID:"C98C711F-AAB5-482B-B0FF-2C8D1A6908B1",
+location:"631,90",
+mediaOptions:2,
+name:"btn_add_rp_user",
+onActionMethodID:"09683411-0331-4A08-BF5E-656611194522",
+onRenderMethodID:"-1",
+rolloverCursor:12,
+showClick:false,
+showFocus:false,
+size:"30,30",
+toolTipText:"Aggiungi osservatore",
+typeid:7,
+uuid:"9648FD49-A322-41A7-9C27-EDAC8E046F53"
+},
+{
+formIndex:13805,
+imageMediaID:"C98C711F-AAB5-482B-B0FF-2C8D1A6908B1",
+location:"631,240",
+name:"btn_add_keyc",
+onActionMethodID:"7F4C7809-E7D7-47A0-BB2F-C1971A145E30",
+rolloverCursor:12,
+showClick:false,
+showFocus:false,
+size:"30,30",
+toolTipText:"Aggiungi una chiave",
+transparent:true,
+typeid:7,
+uuid:"9A289CBE-7D9E-484B-B394-972EF8660875"
+},
+{
+height:500,
+partType:5,
+typeid:19,
+uuid:"A0667B19-C84F-40E9-BD7B-6928FC2FC2AF"
+},
+{
+imageMediaID:"C98C711F-AAB5-482B-B0FF-2C8D1A6908B1",
+location:"945,240",
+mediaOptions:2,
+name:"btn_add_key",
+onActionMethodID:"7F4C7809-E7D7-47A0-BB2F-C1971A145E30",
+onRenderMethodID:"-1",
+rolloverCursor:12,
+showClick:false,
+showFocus:false,
+size:"30,30",
+toolTipText:"i18n:svy.fr.lbl.add",
+typeid:7,
+uuid:"B1287B9C-6204-413F-8AAD-24802F5DA8C6",
+visible:false
+},
+{
+anchors:13,
+borderType:"SpecialMatteBorder,0.0,1.0,0.0,0.0,#000000,#336699,#000000,#000000,0.0,",
+items:[
+{
+containsFormID:"12F0E0BD-1B6D-4AE9-B331-B693AAF978C8",
+location:"259,288",
+name:"tab_users",
+text:"i18n:svy.fr.lbl.users",
+typeid:15,
+uuid:"D23E5F60-D3B7-4398-A997-3C86DF5F75B1"
+}
+],
+location:"251,270",
+name:"tab_users",
+printable:false,
+size:"360,230",
+tabOrientation:-1,
+transparent:true,
+typeid:16,
+uuid:"B418174A-3305-492F-A256-6E699E5E7F3F"
+},
+{
+anchors:9,
+imageMediaID:"E5CF86AC-5872-48CB-BEE8-1BF7E0165322",
+location:"661,240",
+mediaOptions:2,
+name:"btn_add_by_categhory",
+onActionMethodID:"AC648A3D-35AB-4D66-8358-3801F6E7ED7D",
+rolloverCursor:12,
+showClick:false,
+showFocus:false,
+size:"30,30",
+toolTipText:"Aggiungi chiavi per tipologia di utenza (menu)",
+typeid:7,
+uuid:"BCA4F350-B587-4292-AF7B-4F079D947C68"
+},
+{
+borderType:"SpecialMatteBorder,0.0,1.0,0.0,0.0,#000000,#336699,#000000,#000000,0.0,",
+items:[
+{
+containsFormID:"F9EC3760-CFA7-4DC9-8B72-E7D3EA1F6644",
+location:"251,150",
+text:"ma_sec_main_rp_group_tbl",
+typeid:15,
+uuid:"171282EA-069E-41F2-9AC2-BF843D2717DF"
+}
+],
+location:"251,120",
+name:"tab_rp_groups",
+printable:false,
+size:"360,115",
+tabOrientation:-1,
+transparent:true,
+typeid:16,
+uuid:"D1734BB8-7229-46F7-BE8E-3FEFDF0433CF"
+},
+{
+anchors:15,
+borderType:"SpecialMatteBorder,0.0,0.0,0.0,1.0,#000000,#000000,#000000,#336699,0.0,",
+items:[
+{
+containsFormID:"FA7043F1-38CB-4348-9A89-3C8905956783",
+location:"640,280",
+text:"ma_sec_main_organization_key_tbl",
+typeid:15,
+uuid:"7938DCB7-8EA3-442E-B740-0603EA82751B"
+}
+],
+location:"620,270",
+name:"tab_keys",
+printable:false,
+size:"360,230",
+tabOrientation:-1,
+transparent:true,
+typeid:16,
+uuid:"F1587403-3D27-4B9C-A02B-544E4A5A8B98"
+},
+{
+dataProviderID:"sec_organization_hierarchy_to_sec_organization.login_enabled",
+displayType:4,
+formIndex:13806,
+horizontalAlignment:0,
+location:"555,20",
+size:"20,20",
+styleClass:"check",
+transparent:true,
+typeid:4,
+uuid:"F7D74F59-0918-4AAE-80A2-421D5EC9C863"
+}
+],
+name:"ma_sec_main_organization_tree",
+navigatorID:"-1",
+onShowMethodID:"8C7A4631-7967-460A-886E-1C9BC484D72B",
+showInMenu:true,
+size:"980,500",
+styleName:"leaf_style",
+typeid:3,
+uuid:"0E240B5B-723A-449D-8854-EB059EB94E67"

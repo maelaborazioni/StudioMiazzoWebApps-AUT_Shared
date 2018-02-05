@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:true,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/ma_framework/sec_filtrigruppiclassificazionidettaglio",
+items:[
+{foreignColumnName:"security_key_id",primaryDataProviderID:"security_key_id",typeid:23,uuid:"7D3B9AC6-4F9A-4DF7-85E3-FCD37AE11B43"}
+],
+name:"sec_security_key_to_sec_filtrigruppiclassificazionidettaglio",
+primaryDataSource:"db:/svy_framework/sec_security_key",
+typeid:22,
+uuid:"1C5E0E42-C5E3-4754-88D2-12708E1ADB03"

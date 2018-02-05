@@ -1,0 +1,7 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/ma_framework/sec_filtriditte",
+joinType:1,
+name:"sec_filtriditte_to_sec_filtriditte",
+primaryDataSource:"db:/ma_framework/sec_filtriditte",
+typeid:22,
+uuid:"946F4ECC-F550-4298-A9B3-4E1D15E6E252"

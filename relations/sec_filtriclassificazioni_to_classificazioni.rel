@@ -1,0 +1,10 @@
+allowCreationRelatedRecords:false,
+foreignDataSource:"db:/ma_anagrafiche/v_dittaclassificazioni",
+items:[
+{foreignColumnName:"idclassificazione",operator:0,primaryDataProviderID:"idclassificazione",typeid:23,uuid:"D737D7B1-8F05-49D4-95D8-DE33AFED3A55"}
+],
+joinType:1,
+name:"sec_filtriclassificazioni_to_classificazioni",
+primaryDataSource:"db:/ma_framework/sec_filtriclassificazioni",
+typeid:22,
+uuid:"396627B6-83B2-4830-97BB-71FB85E23C48"

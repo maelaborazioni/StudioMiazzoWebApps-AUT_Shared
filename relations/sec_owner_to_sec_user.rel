@@ -1,0 +1,12 @@
+allowCreationRelatedRecords:true,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/svy_framework/sec_user",
+initialSort:"name_compound asc",
+items:[
+{foreignColumnName:"owner_id",primaryDataProviderID:"owner_id",typeid:23,uuid:"38200076-9C10-4A0F-B96E-4D05F0294905"}
+],
+joinType:1,
+name:"sec_owner_to_sec_user",
+primaryDataSource:"db:/svy_framework/sec_owner",
+typeid:22,
+uuid:"AE4C3086-2D0E-4F35-8B67-4800D6DC3585"

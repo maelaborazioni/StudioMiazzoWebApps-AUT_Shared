@@ -1,0 +1,11 @@
+allowCreationRelatedRecords:true,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/svy_framework/sec_organization_hierarchy",
+items:[
+{foreignColumnName:"organization_id",operator:0,primaryDataProviderID:"organization_id",typeid:23,uuid:"ADF794CA-CEC0-486B-8938-18DBC3D97157"}
+],
+joinType:1,
+name:"sec_organization_to_sec_organization_hierarchy",
+primaryDataSource:"db:/svy_framework/sec_organization",
+typeid:22,
+uuid:"895483E6-6F28-4D76-B710-F651BC806E81"

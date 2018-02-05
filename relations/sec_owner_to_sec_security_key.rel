@@ -1,0 +1,12 @@
+allowCreationRelatedRecords:true,
+allowParentDeleteWhenHavingRelatedRecords:false,
+deleteRelatedRecords:true,
+foreignDataSource:"db:/svy_framework/sec_security_key",
+items:[
+{foreignColumnName:"owner_id",primaryDataProviderID:"owner_id",typeid:23,uuid:"3749ED61-998C-48D5-9965-FA075D401371"}
+],
+joinType:1,
+name:"sec_owner_to_sec_security_key",
+primaryDataSource:"db:/svy_framework/sec_owner",
+typeid:22,
+uuid:"AE797F84-B6D8-41A0-856A-5257ABD72183"

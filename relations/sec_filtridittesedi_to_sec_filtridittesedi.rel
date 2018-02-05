@@ -1,0 +1,7 @@
+allowCreationRelatedRecords:true,
+foreignDataSource:"db:/ma_framework/sec_filtridittesedi",
+joinType:1,
+name:"sec_filtridittesedi_to_sec_filtridittesedi",
+primaryDataSource:"db:/ma_framework/sec_filtridittesedi",
+typeid:22,
+uuid:"CF8E205D-78B6-48BD-9CF4-75D5EBC244AE"

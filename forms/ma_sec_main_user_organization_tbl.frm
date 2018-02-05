@@ -1,0 +1,13 @@
+dataSource:"db:/svy_framework/sec_user_org",
+extendsID:"28BEA70D-2703-4ED6-BA9D-A6014E1618B6",
+items:[
+{
+height:480,
+partType:5,
+typeid:19,
+uuid:"BE686404-5576-444B-9809-64039ED9FDE0"
+}
+],
+name:"ma_sec_main_user_organization_tbl",
+typeid:3,
+uuid:"D1B00DD4-4539-4885-8DDF-B8372B87A58C"

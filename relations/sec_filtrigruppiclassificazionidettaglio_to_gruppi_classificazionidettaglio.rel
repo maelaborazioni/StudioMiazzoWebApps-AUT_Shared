@@ -1,0 +1,9 @@
+foreignDataSource:"db:/ma_anagrafiche/gruppi_classificazionidettaglio",
+items:[
+{foreignColumnName:"idgruppoclassificazionedettaglio",primaryDataProviderID:"idgruppoclassificazionedettaglio",typeid:23,uuid:"FDA72F56-13E7-450D-AC7D-02CF98687EEC"}
+],
+joinType:1,
+name:"sec_filtrigruppiclassificazionidettaglio_to_gruppi_classificazionidettaglio",
+primaryDataSource:"db:/ma_framework/sec_filtrigruppiclassificazionidettaglio",
+typeid:22,
+uuid:"2296DF27-84C4-40F6-B483-A8B70FDDF86E"
