@@ -5,6 +5,7 @@ function loadRecords() {
 	var _ds = databaseManager.createEmptyDataSet(0, ['security_key_id']);
 	
 	if (forms.ma_sec_main_user_security.foundset.user_org_id) {		
+		//_ds = globals.svy_sec_getUserOrgSecurityKeys(forms.ma_sec_main_user_security.foundset.user_org_id)
 		_ds = globals.ma_sec_getSecurityKeys
 			(
 				  forms.ma_sec_main_user_security.foundset.user_org_id

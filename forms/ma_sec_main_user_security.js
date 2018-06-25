@@ -62,12 +62,13 @@ function setValueList() {
 	if (databaseManager.hasRecords(forms.ma_sec_main_user.foundset.sec_user_to_sec_user_org)) {
 		var _fsUserOrganizations = forms.ma_sec_main_user.foundset.sec_user_to_sec_user_org.duplicateFoundSet();
 		_fsUserOrganizations.unrelate();
-			
+		_fsUserOrganizations.sort('sec_user_org_to_sec_organization.sec_organization_to_sec_owner.name asc,sec_user_org_to_sec_organization.name asc');	
+		
 		for (var i = 1; i <= _fsUserOrganizations.getSize(); i++) {
 			_fsUserOrganizations.setSelectedIndex(i);
 			_vlRealValues[i - 1] = _fsUserOrganizations.organization_id;
 			// MAVariazione - Also display the owner's name
-			_vlDisplayValues[i - 1] = (_fsUserOrganizations.sec_user_org_to_sec_organization.name && _fsUserOrganizations.sec_user_org_to_sec_organization.sec_organization_to_sec_owner ? _fsUserOrganizations.sec_user_org_to_sec_organization.name + ' - ' + _fsUserOrganizations.sec_user_org_to_sec_organization.sec_organization_to_sec_owner.name : '');
+			_vlDisplayValues[i - 1] = (_fsUserOrganizations.sec_user_org_to_sec_organization.name && _fsUserOrganizations.sec_user_org_to_sec_organization.sec_organization_to_sec_owner ?  _fsUserOrganizations.sec_user_org_to_sec_organization.sec_organization_to_sec_owner.name + ' - ' + _fsUserOrganizations.sec_user_org_to_sec_organization.name: '');
 			
 			if (i == 1) {
 				_vlFirstValue = _fsUserOrganizations.organization_id;

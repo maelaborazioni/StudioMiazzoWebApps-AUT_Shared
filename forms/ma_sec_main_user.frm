@@ -33,9 +33,15 @@ uuid:"08BB52FC-C9DD-4993-9CBC-D3BEFFA409E0"
 },
 {
 extendsID:"6E910502-DA70-40C9-8810-19F8EB9D6C21",
-location:"772,270",
+location:"506,271",
 typeid:7,
 uuid:"0F12AB55-EEF5-4C51-A7E0-3C0187E3D395"
+},
+{
+extendsID:"A25A461C-0474-40D0-874D-523D83C969BE",
+typeid:7,
+uuid:"1AC5B5E6-C25D-4650-A6E0-3D9BD647A23D",
+visible:false
 },
 {
 extendsID:"763C3070-8CD7-4A0B-9B02-9C2EADD72761",
@@ -249,7 +255,7 @@ uuid:"9F36B34D-C70A-4674-AAED-3B738F780B73"
 },
 {
 extendsID:"3E6B50C5-FA7D-4EFD-99E2-27BC67E1DC74",
-location:"771,272",
+location:"505,272",
 text:"Sicurezza",
 typeid:7,
 uuid:"AB6F690C-C374-4226-B1B0-9BA1731F6AC7"
@@ -345,7 +351,7 @@ uuid:"D9121C11-19F6-4399-8E2C-525E494AE33E"
 },
 {
 extendsID:"400D3882-AD44-4A49-87D6-5136565DB1AF",
-location:"778,270",
+location:"512,271",
 typeid:7,
 uuid:"E9C0C923-F634-4ED6-96E2-82C5ADE6E365"
 },
@@ -375,7 +381,7 @@ visible:false
 },
 {
 extendsID:"FC6BB27B-DA37-49FC-AA10-B8C5C25BB729",
-location:"882,270",
+location:"616,271",
 typeid:7,
 uuid:"F343AD11-C7A7-48EE-8B00-95F8F85F5F00"
 },
@@ -401,7 +407,7 @@ uuid:"F98C2B1D-D728-4A5B-9A88-68A6E7947E3C"
 {
 anchors:3,
 editable:false,
-location:"490,220",
+location:"540,201",
 size:"270,30",
 styleClass:"big_font",
 typeid:4,

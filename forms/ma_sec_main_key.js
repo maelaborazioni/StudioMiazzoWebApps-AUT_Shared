@@ -49,14 +49,14 @@ function onShow(event, firstShow)
 	
 	elements.tab_security_details.enabled = foundset && foundset.getSize() > 0;
 	
-	/** @type {JSFoundset<db:/ma_anagrafiche/gruppi>} */
-	var fsGruppi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.GRUPPI);
-	fsGruppi.loadAllRecords();
-	var enableTabGruppi = fsGruppi.getSize() ? true : false;
-	elements.lbl_groups.visible =
-		elements.tab_groups.visible = 
-			elements.tab_left_groups.visible = 
-				elements.tab_right_groups.visible = enableTabGruppi;
+//	/** @type {JSFoundset<db:/ma_anagrafiche/gruppi>} */
+//	var fsGruppi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.GRUPPI);
+//	fsGruppi.loadAllRecords();
+//	var enableTabGruppi = fsGruppi.getSize() ? true : false;
+//	elements.lbl_groups.visible =
+//		elements.tab_groups.visible = 
+//			elements.tab_left_groups.visible = 
+//				elements.tab_right_groups.visible = enableTabGruppi;
 }
 
 /**

@@ -195,7 +195,7 @@ function updateLavoratore(lavoratore)
 				null,
 				null,
 				null,
-				globals.setSendGridSmtpProperties()))
+				globals.setSparkPostSmtpProperties()))
 				globals.ma_utl_showWarningDialog(plugins.mail.getLastSendMailExceptionMsg(), 'Comunicazione gestione richiesta');
 			} else
 				globals.ma_utl_showWarningDialog('i18n:ma.msg.notValidEmailAddress', 'Comunicazione gestione richiesta');
@@ -302,7 +302,7 @@ function updateLavoratori(lavoratori) {
 									null,
 									null,
 									null,
-									globals.setSendGridSmtpProperties()))
+									globals.setSparkPostSmtpProperties()))
 									globals.ma_utl_showWarningDialog(plugins.mail.getLastSendMailExceptionMsg(), 'Comunicazione gestione richiesta');
 							} else
 								globals.ma_utl_showWarningDialog('i18n:ma.msg.notValidEmailAddress', 'Comunicazione gestione richiesta');
@@ -443,7 +443,14 @@ function onActionPrintUtenti(event)
 				if(rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori)
 				{
 					ds.setValue(u,1,rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori.codice);
-					ds.setValue(u,2,rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori.lavoratori_to_persone.nominativo);
+					ds.setValue(u,2,rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori.lavoratori_to_persone ?
+							        rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori.lavoratori_to_persone.nominativo
+						            : 
+									(rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori.lavoratori_to_lavoratori_personeesterne ?
+						            	rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori.lavoratori_to_lavoratori_personeesterne.nominativo
+									    : ""
+									)
+								);
 					ds.setValue(u,3,rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori.codicefiscale);
 					ds.setValue(u,4,globals.dateFormat(rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori.assunzione,globals.EU_DATEFORMAT));
 					ds.setValue(u,5,globals.dateFormat(rec.sec_user_to_sec_user_to_lavoratori.sec_user_to_lavoratori_to_lavoratori.scadenzacontratto,globals.EU_DATEFORMAT));  			
@@ -473,7 +480,7 @@ function onActionPrintUtenti(event)
 			}
 		}
 		
-		result = globals.xls_export(ds,fileName,localFile,false,false,null,'Utenti ruoli',template,colNames);
+		result = globals.xls_export(ds,fileName,localFile,false,true,null,'Utenti ruoli',template,colNames);
 		ds.removeRow(-1);
 		
 		output = (result.length > 0 && result) || output;
@@ -531,7 +538,7 @@ function sendAllCredentials(event)
 		var mailAddress = rec.com_email;
 		if(mailAddress && plugins.mail.isValidEmailAddress(mailAddress))
 		{
-			var properties = globals.setSendGridSmtpProperties();
+			var properties = globals.setSparkPostSmtpProperties();
 			var subject = "Presenza Semplice Studio Miazzo - Comunicazione credenziali per accesso all\'applicativo";
 			var userName = rec.name_first_names && rec.name_last ? rec.name_first_names + " " + rec.name_last : rec.user_name
 			var msgText = "plain msg<html>";
@@ -602,11 +609,11 @@ function sendCredentials(event)
 	var mailAddress = rec.com_email;
 	if(mailAddress && plugins.mail.isValidEmailAddress(mailAddress))
 	{
-		var properties = globals.setSendGridSmtpProperties();
+		var properties = globals.setSparkPostSmtpProperties();
 		var subject = "Presenza Semplice Studio Miazzo - Comunicazione credenziali per accesso all\'applicativo";
 		var userName = rec.name_first_names && rec.name_last ? rec.name_first_names + " " + rec.name_last : rec.user_name
-		var msgText = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head>";
-		msgText += "<body>plain msgGentile <b>" + userName;
+		var msgText = "plain msg<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head>";
+		msgText += "<body>Gentile <b>" + userName;
 		msgText += "</b>, <br/>";
 	    msgText += "con la presente le comunichiamo le credenziali per le richieste di <b>Ferie e permessi</b>. <br/>";
 	    msgText += "Per accedere, collegarsi al sito cliccando sul seguente <a href='https://webapp.studiomiazzo.it/login.html'>link</a> oppure digitando nel vostro browser l\'indirizzo https://webapp.studiomiazzo.it/login.html<br/>";

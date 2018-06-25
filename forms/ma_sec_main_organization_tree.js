@@ -359,6 +359,7 @@ function refreshTreeStructure(oldValue, newValue, event)
 function addKey(event) 
 {
 	forms.ma_sec_main_organization_key_tbl.addRecord(event, owner_id_calc, forms.ma_sec_main_organization_group_tbl.group_id);
+	forms.ma_sec_main.controller.readOnly = false;
 }
 
 /**
@@ -373,6 +374,7 @@ function addKey(event)
 function addKeyGroup(event)
 {
 	forms.ma_sec_main_organization_key_tbl.addGroupKey(event);
+	forms.ma_sec_main.controller.readOnly = false;
 }
 
 /**
@@ -385,6 +387,7 @@ function addKeyGroup(event)
 function addKeyCategory(event)
 {
 	forms.ma_sec_main_organization_key_tbl.addCategoryKey(event);
+	forms.ma_sec_main.controller.readOnly = false;
 }
 
 /**
@@ -428,6 +431,7 @@ function onShow(firstShow, event)
 function addUser(event) 
 {
 	forms.ma_sec_main_organization_group_user_tbl.addRecord(event, organization_id.toString(), forms.ma_sec_main_organization_group_tbl.group_id);
+	forms.ma_sec_main.controller.readOnly = false;
 }
 
 /**

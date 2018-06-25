@@ -72,7 +72,7 @@ function addRecord(event)
 				// inseriamo il nuovo record
 				/** @type {JSFoundset<db:/svy_framework/sec_user_in_group>}*/
 				var fsUserInGr = fsUserOrg.sec_user_org_to_sec_user_in_group//databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_in_group');
-				if(fsUserInGr.newRecord())
+				if(fsUserInGr && fsUserInGr.newRecord())
 				{
 					databaseManager.startTransaction();
 //					fsUserInGr.user_org_id = userOrgId;
@@ -84,10 +84,10 @@ function addRecord(event)
 						globals.ma_utl_showErrorDialog('Errore durante il salvataggio del ruolo, si prega di riprovare','Aggiungi ruolo');
 					    return;
 					}
-					application.output('record inserito')
 				}
 				else
 				{
+					databaseManager.rollbackTransaction();
 					globals.ma_utl_showErrorDialog('Errore durante la creazione del nuovo record, si prega di riprovare','Aggiungi ruolo');
 				    return;
 				}

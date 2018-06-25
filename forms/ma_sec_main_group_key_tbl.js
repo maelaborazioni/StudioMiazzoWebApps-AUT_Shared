@@ -72,6 +72,7 @@ function addRecord(event, owner_ID, group_ID) {
 		
 		databaseManager.saveData();
 	}
+	
 }
 
 /**
@@ -137,6 +138,7 @@ function addGroupKey(event)
 	} else
 		globals.ma_utl_showInfoDialog('Non è stato selezionato alcun gruppo di chiavi','Aggiungi gruppo di chiavi');
 
+	forms.ma_sec_main.controller.readOnly = false;
 }
 
 /**
@@ -202,5 +204,7 @@ function addCategoryKey(event)
 		
 	} else
 		globals.ma_utl_showInfoDialog('Non è stata selezionata alcuna tipologia di menu');
+	
+	forms.ma_sec_main.controller.readOnly = false;
 }
 

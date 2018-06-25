@@ -78,7 +78,7 @@ function process_check_password(_event)
 			var mailAddress = rec.com_email;
 			if(mailAddress && plugins.mail.isValidEmailAddress(mailAddress))
 			{
-				var properties = globals.setSendGridSmtpProperties();
+				var properties = globals.setSparkPostSmtpProperties();
 				var subject = "Presenza Semplice Studio Miazzo - Comunicazione nuova password per accesso all\'applicativo";
 				var userName = rec.name_first_names && rec.name_last ? rec.name_first_names + " " + rec.name_last : rec.user_name
 				var msgText = "plain msg<html>";
