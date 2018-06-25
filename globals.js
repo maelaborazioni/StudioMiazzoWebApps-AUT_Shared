@@ -44,6 +44,13 @@ function ma_sec_logout()
 	else
 		_solution = application.getSolutionName();
 	
+	// remove cookies info if user doesn't need/want to store them 
+	if(!globals.svy_sec_cookies)
+	{
+		var arrProperties = application.getUserPropertyNames();
+		for(var c = 0; c < arrProperties; c++)
+			application.setUserProperty(arrProperties[c],null);
+	}
 	var url = RfpServerLink + "/servoy-webclient/ss/s/" + _solution;
 	application.showURL(url,'_self');
 	
@@ -72,7 +79,7 @@ var sec =
  *
  * @properties={typeid:35,uuid:"9EB64538-B616-480D-9CE8-EE75EBC450F2",variableType:8}
  */
-var ma_sec_lgn_groupid = null;
+var ma_sec_lgn_groupid = -1;
 
 /**
  * @param {Object} user_org_id
@@ -395,8 +402,8 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		else
 		{
 			_tipoConnessione = globals.Connessione.SEDE;
-			if(_to_sec_user$user_id.flag_super_administrator)
-			    globals.ma_utl_showInfoDialog('Amministratore : connesso in modalità sede');
+//			if(_to_sec_user$user_id.flag_super_administrator)
+//			    globals.ma_utl_showInfoDialog('Amministratore : connesso in modalità sede');
 		}
 		
 		// utente associato a lavoratore cessato
@@ -440,7 +447,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 				RestServerLink = 'http://10.255.255.20'; // non risolve più il nome...
 				RfpServerLink = 'http://213.92.43.92:8080';
 				LinkedServer.SRV_SEDE = 'SRV-EPIWEB-DEV';
-			    break;
+			    break; 
 	
 			// debug standard
 			case ENVIRONMENT.DEBUG :
@@ -521,7 +528,8 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		/**
 		 * Preimposta e blocca il filtro su ditta se è disponibile una sola ditta
 		 */
-		globals.ma_utl_setCompanyFilter();
+		if(ma_utl_hasKey(Key.RILEVAZIONE_PRESENZE))
+			globals.ma_utl_setCompanyFilter();
 	
 		/**
 		 * Retrieve and run all the modules' onOpen methods
@@ -1475,11 +1483,11 @@ function ma_sec_setUsersFilters()
 		}	
 		
 		// Security tab is only accessible by administrators
-		var secFrm = forms.ma_sec_main_user;
-		secFrm.elements.lbl_security.visible = false;
-		secFrm.elements.tab_security.visible = false;
-		secFrm.elements.tab_left_security.visible = false;
-		secFrm.elements.tab_right_security.visible = false;
+//		var secFrm = forms.ma_sec_main_user;
+//		secFrm.elements.lbl_security.visible = false;
+//		secFrm.elements.tab_security.visible = false;
+//		secFrm.elements.tab_left_security.visible = false;
+//		secFrm.elements.tab_right_security.visible = false;
 	}
 }
 
