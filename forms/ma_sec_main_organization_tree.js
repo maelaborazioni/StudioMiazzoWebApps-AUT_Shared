@@ -43,7 +43,7 @@ function refreshTree(owner_ID)
 	
 	elements.organization_hierarchy.removeAllRoots();
 	
-	/** @type {JSFoundset<db:/svy_framework/sec_organization>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_organization>} */
 	var parents = databaseManager.getFoundSet(globals.nav_db_framework, 'sec_organization');
 	var sqlQuery = "SELECT \
 						org.organization_id \

@@ -77,7 +77,7 @@ function updateValues(ids)
 	try
 	{
 		var form = forms[elements.values.getTabFormNameAt(1)];
-		/** @type {JSFoundset<db:/svy_framework/sec_group>} */
+		/** @type {JSFoundSet<db:/svy_framework/sec_group>} */
 		var fs   = form.foundset.duplicateFoundSet();
 		
 		var currentSelection = globals.foundsetToArray(form.foundset, 'group_id');

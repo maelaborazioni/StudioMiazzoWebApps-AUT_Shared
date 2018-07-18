@@ -93,7 +93,7 @@ function addGroupKey(event)
 		// per ogni gruppo selezionato, vanno recuperate le chiavi associate al gruppo di chiavi
 		for (var gk = 1; gk <= length; gk++)
 		{
-			/** @type {JSFoundset<db:/svy_framework/sec_security_key_to_group>} */
+			/** @type {JSFoundSet<db:/svy_framework/sec_security_key_to_group>} */
 			var _foundsetKey = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK, 'sec_security_key_to_group');
 			if (_foundsetKey.find()) {
 				// gestione salvataggio chiavi in base al gruppo
@@ -112,7 +112,7 @@ function addGroupKey(event)
 				}
 			}
 // OLD code			
-//			/** @type {JSFoundset<db:/svy_framework/sec_security_key>} */
+//			/** @type {JSFoundSet<db:/svy_framework/sec_security_key>} */
 //			var _foundsetKey = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK, 'sec_security_key');
 //			if (_foundsetKey.find()) {
 //				// gestione salvataggio chiavi in base al gruppo
@@ -157,7 +157,7 @@ function addCategoryKey(event)
 	
 	if (menuKey) 
 	{
-		/** @type {JSFoundset<db:/svy_framework/sec_security_key_to_cathegory>} */
+		/** @type {JSFoundSet<db:/svy_framework/sec_security_key_to_cathegory>} */
 		var _foundsetKey = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK, 'sec_security_key_to_cathegory');
 		if (_foundsetKey.find())
 		{
@@ -179,7 +179,7 @@ function addCategoryKey(event)
 		}
 
 // OLD code		
-//		/** @type {JSFoundset<db:/svy_framework/sec_security_key>} */
+//		/** @type {JSFoundSet<db:/svy_framework/sec_security_key>} */
 //		var _foundsetKey = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK, 'sec_security_key');
 //		if (_foundsetKey.find())
 //		{

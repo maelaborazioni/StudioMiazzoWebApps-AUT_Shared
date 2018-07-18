@@ -126,7 +126,7 @@ function updateValues(ids)
 	try
 	{
 		var form = forms[elements.values.getTabFormNameAt(1)];
-		/** @type {JSFoundset<db:/ma_framework/sec_filtrilavoratori>} */
+		/** @type {JSFoundSet<db:/ma_framework/sec_filtrilavoratori>} */
 		var fs   = form.foundset.duplicateFoundSet();
 		
 		var currentSelection = globals.foundsetToArray(form.foundset, 'idlavoratore');

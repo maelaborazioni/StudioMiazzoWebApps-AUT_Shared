@@ -93,7 +93,7 @@ function lookupLavoratori(event)
 {
 	// rendiamo disabilitati i lavoratori precedentemente mappati (modificabili in gestione singola)
 	var arrLavMappati = [];
-	/** @type {JSFoundset<db:/svy_framework/sec_user_to_lavoratori>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_to_lavoratori>} */
 	var fsLavMappati = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK, 'sec_user_to_lavoratori');
 	if(fsLavMappati && fsLavMappati.find())
 	{
@@ -217,10 +217,10 @@ function updateLavoratori(lavoratori) {
 		if (lavoratori.length == 0)
 			return;
 		
-		/** @type {JSFoundset<db:/svy_framework/sec_user>} */
+		/** @type {JSFoundSet<db:/svy_framework/sec_user>} */
 		var fsUser = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user');
 		
-		/** @type {JSFoundset<db:/svy_framework/sec_user_to_lavoratori>} */
+		/** @type {JSFoundSet<db:/svy_framework/sec_user_to_lavoratori>} */
 		var fsLavMappati = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK, 'sec_user_to_lavoratori');
 		if(fsLavMappati && fsLavMappati.find())
 		{
@@ -239,7 +239,7 @@ function updateLavoratori(lavoratori) {
 			if (arrLavMappati.indexOf(lavoratori[l]) == -1) 
 			{
 				// ottieni informazioni lavoratore e crea i record necessari
-				/** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>} */
+				/** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>} */
 				var fsLav = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.LAVORATORI);
 				if (fsLav.find()) 
 				{
@@ -378,7 +378,7 @@ function doSearch()
 		// search only active users
 		if(vChkAttivi)
 		{
-		   /** @type {JSFoundset<db:/ma_anagrafiche/lavoratori>}*/
+		   /** @type {JSFoundSet<db:/ma_anagrafiche/lavoratori>}*/
 		   var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.LAVORATORI);
 		   fs.find();
 		   fs.cessazione = '^||>=' + globals.dateFormat(globals.TODAY,globals.ISO_DATEFORMAT) + '|yyyyMMdd';

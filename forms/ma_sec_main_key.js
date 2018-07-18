@@ -49,7 +49,7 @@ function onShow(event, firstShow)
 	
 	elements.tab_security_details.enabled = foundset && foundset.getSize() > 0;
 	
-//	/** @type {JSFoundset<db:/ma_anagrafiche/gruppi>} */
+//	/** @type {JSFoundSet<db:/ma_anagrafiche/gruppi>} */
 //	var fsGruppi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.GRUPPI);
 //	fsGruppi.loadAllRecords();
 //	var enableTabGruppi = fsGruppi.getSize() ? true : false;

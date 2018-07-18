@@ -91,7 +91,7 @@ function doSearch()
 {
 	if (forms.ma_sec_main.searchArgument) 
 	{
-		/** @type {JSFoundset<db:/svy_framework/sec_organization>}*/
+		/** @type {JSFoundSet<db:/svy_framework/sec_organization>}*/
 		var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_organization');
 		fs.find();
 		fs.owner_id = forms.ma_sec_main_owner_organization.owner_id;

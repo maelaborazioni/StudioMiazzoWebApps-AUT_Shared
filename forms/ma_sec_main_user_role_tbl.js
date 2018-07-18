@@ -51,7 +51,7 @@ function addRecord(event)
 			if (tempFoundset['is_selected'] == 1) 
 			{	
 				// troviamo l'organizzazione associata al gruppo selezionato (dalla tabella sec_system_group)
-				/** @type {JSFoundset<db:/svy_framework/sec_system_group>}*/
+				/** @type {JSFoundSet<db:/svy_framework/sec_system_group>}*/
 				var fsSystemGr = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_system_group');
 				fsSystemGr.find();
 				fsSystemGr.group_id = tempFoundset['group_id'];
@@ -60,7 +60,7 @@ function addRecord(event)
 				application.output('organization : ' + organizationId)
 				
 				// troviamo l'user_og_id a partire dall'organizzazione appena ottenuta
-				/** @type {JSFoundset<db:/svy_framework/sec_user_org>}*/
+				/** @type {JSFoundSet<db:/svy_framework/sec_user_org>}*/
 				var fsUserOrg = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_org'); 
 				fsUserOrg.find();
 				fsUserOrg.user_id = userId;
@@ -70,7 +70,7 @@ function addRecord(event)
 				application.output('user_org_id : ' + userOrgId)
 				
 				// inseriamo il nuovo record
-				/** @type {JSFoundset<db:/svy_framework/sec_user_in_group>}*/
+				/** @type {JSFoundSet<db:/svy_framework/sec_user_in_group>}*/
 				var fsUserInGr = fsUserOrg.sec_user_org_to_sec_user_in_group//databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_in_group');
 				if(fsUserInGr && fsUserInGr.newRecord())
 				{

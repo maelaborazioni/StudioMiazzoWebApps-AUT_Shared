@@ -27,7 +27,7 @@ var vExclude = 0;
  */
 function selectValues(event)
 {
-	/** @type {JSFoundset<db:/ma_anagrafiche/gruppi>} */
+	/** @type {JSFoundSet<db:/ma_anagrafiche/gruppi>} */
 	var fsGruppi = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.GRUPPI);
 	if(fsGruppi.loadAllRecords() && fsGruppi.getSize() == 1)
 		selectedGroup = fsGruppi.idgruppo;
@@ -117,7 +117,7 @@ function updateValues(ids)
 	try
 	{
 		var form = forms[elements.values.getTabFormNameAt(1)];
-		/** @type {JSFoundset<db:/ma_framework/sec_filtrigruppiclassificazionidettaglio>} */
+		/** @type {JSFoundSet<db:/ma_framework/sec_filtrigruppiclassificazionidettaglio>} */
 		var fs   = form.foundset.duplicateFoundSet();
 		
 		var currentSelection = globals.foundsetToArray(form.foundset, 'idgruppoclassificazionedettaglio');

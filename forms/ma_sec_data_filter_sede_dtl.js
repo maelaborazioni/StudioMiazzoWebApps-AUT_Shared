@@ -111,7 +111,7 @@ function updateValues(ids)
 	try
 	{
 		var form = forms[elements.values.getTabFormNameAt(1)];
-		/** @type {JSFoundset<db:/ma_framework/sec_filtridittesedi>} */
+		/** @type {JSFoundSet<db:/ma_framework/sec_filtridittesedi>} */
 		var fs   = form.foundset.duplicateFoundSet();
 		
 		var currentSelection = globals.foundsetToArray(form.foundset, 'iddittasede');
@@ -185,7 +185,7 @@ function onDataChangeCodDitta(oldValue, newValue, event)
 {
 	if(newValue)
 	{
-		/** @type {JSFoundset<db:/ma_anagrafiche/ditte>} */
+		/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
 		var fs = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE, globals.Table.DITTE);
 		if (fs && fs.find())
 		{
