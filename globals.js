@@ -633,7 +633,7 @@ function ma_onSolutionOpen_pre(arg, queryParams) {
 		databaseManager.switchServer(globals["svy_nav_getUserDBName"](), _userDB);
 	} else {
 		//Check if userdb is set in ownerrecord. If so, switch to it. 
-		/** @type {JSFoundset<db:/svy_framework/sec_owner>}*/
+		/** @type {JSFoundSet<db:/svy_framework/sec_owner>}*/
 		var _fs = databaseManager.getFoundSet(globals.nav_db_framework, "sec_owner");
 		_fs.loadRecords(databaseManager.convertToDataSet([globals.svy_sec_owner_id]));
 		_userDB = _fs.database_name;
@@ -652,7 +652,7 @@ function ma_onSolutionOpen_pre(arg, queryParams) {
 	
 	//filter data
 	// MAVariazione - Don't filter anything if we are super administrators
-	/** @type {JSFoundset<db:/svy_framework/sec_user>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_user>} */
 	var _foundset = databaseManager.getFoundSet(globals.nav_db_framework, 'sec_user')
 	var _rec
 	if(_foundset.find())
@@ -1109,7 +1109,7 @@ function ma_sec_setTableFilters() {
 						WHERE 		security_key_id IN (' + globals.nav.keys + ') \
 						ORDER BY 	owner_id, server_name, table_name, filter_field_name;'
 
-	/** @type {JSFoundset<db:/svy_framework/sec_table_filter>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_table_filter>} */
 	var fs = databaseManager.getFoundSet(server, 'sec_table_filter');
 	fs.loadRecords(sqlQuery);
 	
@@ -1416,7 +1416,7 @@ function ma_sec_showSecurityDialog()
  */
 function ma_sec_getSecurityKeyForGroup(group_id,key_id)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_user_right>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_user_right>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_user_right');
 	if(fs.find())
 	{
@@ -1541,7 +1541,7 @@ function getRpGroups(organizationID)
 {
 	/** @type {Array<Number>} */
 	var arrRpGroups = [];
-	/** @type {JSFoundset<db:/svy_framework/sec_organization_to_rp_group>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_organization_to_rp_group>} */
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_organization_to_rp_group');
 	if(fs.find())
 	{
@@ -1566,7 +1566,7 @@ function getRpUsers(organizationID)
 {
 	/** @type {Array<Number>} */
 	var arrRpUsers = [];
-	/** @type {JSFoundset<db:/svy_framework/sec_organization_to_rp_user>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_organization_to_rp_user>} */
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_organization_to_rp_user');
 	if(fs.find())
 	{
@@ -1583,13 +1583,13 @@ function getRpUsers(organizationID)
  * 
  * @param {String} organizationID
  * 
- * @return {JSFoundset<db:/svy_framework/sec_organization_to_rp_group>}
+ * @return {JSFoundSet<db:/svy_framework/sec_organization_to_rp_group>}
  * 
  * @properties={typeid:24,uuid:"75684F7A-DD7F-4DE5-BC34-A397C2D40D5E"}
  */
 function getRpGroupsInfo(organizationID)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_organization_to_rp_group>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_organization_to_rp_group>} */
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_organization_to_rp_group');
 	if(fs.find())
 	{
@@ -1606,13 +1606,13 @@ function getRpGroupsInfo(organizationID)
  * 
  * @param {String} organizationID
  * 
- * @return {JSFoundset<db:/svy_framework/sec_organization_to_rp_user>}
+ * @return {JSFoundSet<db:/svy_framework/sec_organization_to_rp_user>}
  *
  * @properties={typeid:24,uuid:"1B449DD4-D49A-48D9-B5E1-1AF083019A52"}
  */
 function getRpUsersInfo(organizationID)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_organization_to_rp_user>} */
+	/** @type {JSFoundSet<db:/svy_framework/sec_organization_to_rp_user>} */
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_organization_to_rp_user');
 	if(fs.find())
 	{
@@ -1687,7 +1687,7 @@ function getOrganizationUsersInfo(organizationID)
  */
 function getParentOrganization(organizationID)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_organization_hierarchy>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_organization_hierarchy>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_organization_hierarchy');
 	if(fs.find())
 	{
@@ -1710,7 +1710,7 @@ function getParentOrganization(organizationID)
  */
 function getOrganizationName(organizationID)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_organization>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_organization>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_organization');
 	if(fs.find())
 	{
@@ -1733,7 +1733,7 @@ function getOrganizationName(organizationID)
  */
 function getGroupName(groupId)
 {
-	/** @type {JSFoundset<db:/svy_framework/sec_group>}*/
+	/** @type {JSFoundSet<db:/svy_framework/sec_group>}*/
 	var fs = databaseManager.getFoundSet(globals.Server.SVY_FRAMEWORK,'sec_group');
 	if(fs.find())
 	{
