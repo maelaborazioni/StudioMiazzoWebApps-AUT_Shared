@@ -51,9 +51,11 @@ function ma_sec_logout()
 		for(var c = 0; c < arrProperties; c++)
 			application.setUserProperty(arrProperties[c],null);
 	}
+	application.setUserProperty(application.getSolutionName() +'.connected','false')
+	
 	var url = RfpServerLink + "/servoy-webclient/ss/s/" + _solution;
 	application.showURL(url,'_self');
-	
+		
 	security.logout(_solution);
 	// in caso non dovesse funzionare, l'istruzione utilizzata finora è application.exit();
 }
@@ -494,6 +496,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		        WS_PSL_URL = RestServerLink + '/Leaf_PSL';
 		        WS_LU_URL = RestServerLink + '/Leaf_LU';
 		        WS_REPORT_URL = RestServerLink + '/Leaf_Report';
+		        WS_REPORT_GIORNALIERA_URL = RestServerLink + '/Leaf_StampaGiornaliera';
 		        WS_PV_URL = RestServerLink + '/Leaf_PV';
 		        WS_RFP_URL = RestServerLink + '/Leaf_RFP';
 		        WS_ADMIN_URL = RestServerLink +'/Leaf_Admin';
@@ -507,10 +510,10 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 			case ENVIRONMENT.DEBUG_VB6:
 			case ENVIRONMENT.DEBUG:
 			case ENVIRONMENT.DEBUG_DIRECT:	
-				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = RestServerLink + '/Leaf_Test';
+				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_REPORT_GIORNALIERA_URL = WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = RestServerLink + '/Leaf_Test';
 				break;
 			case ENVIRONMENT.DEVELOPING:
-				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = 
+				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_REPORT_GIORNALIERA_URL =
 				WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = RestServerLink + '/';
 				break;
 		}
