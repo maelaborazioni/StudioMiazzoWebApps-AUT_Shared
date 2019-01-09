@@ -432,7 +432,7 @@ function onActionPrintUtenti(event)
 		
 		var fsUtenti = forms.ma_sec_main_user_tbl.foundset;
 		var fsUtentiSize = fsUtenti.getSize();
-		var colNames = ['codice','nominativo','codicefiscale','assunzione','scadenzacontratto','cessazione','codditta','ragionesociale','gruppo'];
+		var colNames = ['codice','nominativo','codicefiscale','assunzione','scadenzacontratto','cessazione','codditta','ragionesociale','gruppo','username','mail'];
 		
 		var ds = databaseManager.createEmptyDataSet(fsUtentiSize,colNames);
 		for(var u = 1; u <= fsUtentiSize; u++)
@@ -476,6 +476,9 @@ function onActionPrintUtenti(event)
 				   ds.setValue(u,9,rec.sec_user_to_sec_user_org.sec_user_org_to_sec_user_in_group.sec_user_in_group_to_sec_group.name);
 				else
 					ds.setValue(u,9,'');
+				
+				ds.setValue(u,10,rec.user_name);
+				ds.setValue(u,11,rec.com_email);
 			
 			}
 		}
