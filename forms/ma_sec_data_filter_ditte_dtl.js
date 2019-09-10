@@ -53,6 +53,33 @@ function selectNone(event)
  *
  * @protected
  *
+ * @properties={typeid:24,uuid:"A76CE509-0217-43EC-A1AF-AB8D8F6AF519"}
+ */
+function deleteSelected(event)
+{
+	try
+	{
+		globals.ma_utl_startTransaction();
+		
+		foundset.deleteRecord();
+		
+		globals.ma_utl_commitTransaction();
+	}
+	catch(error)
+	{
+		globals.ma_utl_rollbackTransaction();
+		globals.ma_utl_logError(error, LOGGINGLEVEL.ERROR);
+		globals.ma_utl_showErrorDialog(error.message);
+	}
+}
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @protected
+ *
  * @properties={typeid:24,uuid:"10103A36-04B2-4FEF-A57C-C0154900E8E8"}
  * @AllowToRunInFind
  */

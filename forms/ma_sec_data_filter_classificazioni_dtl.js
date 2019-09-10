@@ -27,6 +27,13 @@ var vCompanyCode = '';
 var vCompanyDescription = '';
 
 /**
+ * @type {Number}
+ *
+ * @properties={typeid:35,uuid:"E28F5AD0-54E0-4E35-8594-D479E379A788",variableType:4}
+ */
+var vDittaClassificazione = -1;
+
+/**
  * Perform the element default action.
  *
  * @param {JSEvent} event the event that triggered the action
@@ -74,6 +81,33 @@ function selectNone(event)
  *
  * @protected
  *
+ * @properties={typeid:24,uuid:"E0EDA897-D937-450B-9F02-F41975CD8E85"}
+ */
+function deleteSelected(event)
+{
+	try
+	{
+		globals.ma_utl_startTransaction();
+		
+		foundset.deleteRecord();
+		
+		globals.ma_utl_commitTransaction();
+	}
+	catch(error)
+	{
+		globals.ma_utl_rollbackTransaction();
+		globals.ma_utl_logError(error, LOGGINGLEVEL.ERROR);
+		globals.ma_utl_showErrorDialog(error.message);
+	}
+}
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @protected
+ *
  * @properties={typeid:24,uuid:"F5C21C0D-1C39-41A1-B6FA-09BF13A3CA04"}
  * @AllowToRunInFind
  */
@@ -85,20 +119,91 @@ function selectValues(event)
 		return;
 	}
 	
-	var selectedValues = globals.ma_utl_showLkpWindow({ event: event, lookup: 'AG_Lkp_Classificazioni', multiSelect: true, methodToAddFoundsetFilter: 'filterClassificazioni', selectedElements: globals.foundsetToArray(foundset, 'idclassificazione') });
+	vDittaClassificazione = globals.ma_utl_showLkpWindow({ 
+														event: event
+														, lookup: 'AG_Lkp_Classificazioni'
+														, multiSelect: false
+														, methodToAddFoundsetFilter: 'filterClassificazioni'
+														});
+	
+	var selectedValues = globals.ma_utl_showLkpWindow({
+														event : new JSEvent,
+														returnForm : controller.getName(),
+														lookup : 'AG_Lkp_ClassificazioniDettaglio',
+														multiSelect : true,
+														allowInBrowse : true,
+														methodToExecuteAfterSelection : 'AggiornaClassificazioniDettaglio',
+														methodToAddFoundsetFilter : 'filterClassificazioniDettaglio',
+														disabledElements: globals.foundsetToArray(foundset, 'idclassificazione')	
+	});
+	
 	if (selectedValues)
 		updateValues(selectedValues);
 }
 
 /**
  * @properties={typeid:24,uuid:"9007364F-33A1-4DC4-BF51-5B90821FD78C"}
+ * @AllowToRunInFind
  */
 function filterClassificazioni(fs)
 {
+	if(!vCompanyID)
+	{
+		globals.ma_utl_showWarningDialog('Selezionare una ditta');
+		return null;
+	}
+	
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
+	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
+	if(fsDitte.find())
+	{
+		fsDitte.idditta = vCompanyID;
+		if(fsDitte.search())
+		{
+			if(fsDitte.tipologia == globals.Tipologia.ESTERNA
+					&& fsDitte.ditte_to_ditte_legami.tipoesterni == 0)
+				vCompanyID = fsDitte.ditte_to_ditte_legami.iddittariferimento;
+		}
+	}
+	
 	if(fs)
 		fs.addFoundSetFilterParam('idditta', globals.ComparisonOperator.EQ, vCompanyID);
 	
 	return fs;
+}
+
+/**
+ * TODO generated, please specify type and doc for the params
+ * @param fs
+ *
+ * @properties={typeid:24,uuid:"02786BC5-C756-4178-AA19-4612A0177483"}
+ */
+function filterClassificazioniDettaglio(fs)
+{
+	if(fs)
+		fs.addFoundSetFilterParam('iddittaclassificazione', globals.ComparisonOperator.EQ, vDittaClassificazione);
+	
+	return fs;
+}
+
+/**
+ * @AllowToRunInFind
+ * 
+ * @return {Array}
+ * 
+ * @properties={typeid:24,uuid:"D93AEC2B-8F9F-4419-8B68-78F9A5903996"}
+ */
+function getDitteFtr()
+{
+	/** @type{JSFoundSet<db:/ma_framework/sec_filtriditte>} */
+	var fsDitteFtr = databaseManager.getFoundSet(globals.Server.MA_FRAMEWORK,'sec_filtriditte');
+	if(fsDitteFtr.find())
+	   fsDitteFtr.search();
+	
+	if(fsDitteFtr.getSize())
+		return globals.foundsetToArray(fsDitteFtr,'idDitta')
+	else
+		return null;
 }
 
 /**
@@ -119,18 +224,18 @@ function updateValues(ids)
 		// Take all records which were not selected before
 		/** @type {Array}*/
 		var addList = ids.filter(function(classificazione){ return currentSelection.indexOf(classificazione) < 0; });
-		// Take all records no more selected
-		/** @type {Array}*/
-		var delList = currentSelection.filter(function(classificazione){ return ids.indexOf(classificazione) < 0; });
+//		// Take all records no more selected
+//		/** @type {Array}*/
+//		var delList = currentSelection.filter(function(classificazione){ return ids.indexOf(classificazione) < 0; });
 		
 		globals.ma_utl_startTransaction();
 		
-		if(fs.find())
-		{
-			fs.idclassificazione = delList;
-			if(fs.search() > 0)
-				fs.deleteAllRecords();
-		}
+//		if(fs.find())
+//		{
+//			fs.idclassificazione = delList;
+//			if(fs.search() > 0)
+//				fs.deleteAllRecords();
+//		}
 		
 		addList.forEach(
 			function(classificazione)

@@ -74,6 +74,33 @@ function selectNone(event)
  *
  * @protected
  *
+ * @properties={typeid:24,uuid:"E1D3A0A6-B1BB-437F-A629-F6583DE1D6F5"}
+ */
+function deleteSelected(event)
+{
+	try
+	{
+		globals.ma_utl_startTransaction();
+		
+		foundset.deleteRecord();
+		
+		globals.ma_utl_commitTransaction();
+	}
+	catch(error)
+	{
+		globals.ma_utl_rollbackTransaction();
+		globals.ma_utl_logError(error, LOGGINGLEVEL.ERROR);
+		globals.ma_utl_showErrorDialog(error.message);
+	}
+}
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @protected
+ *
  * @properties={typeid:24,uuid:"DB93380E-66AC-49D8-8776-73602C0318A7"}
  * @AllowToRunInFind
  */
@@ -85,20 +112,66 @@ function selectValues(event)
 		return;
 	}
 	
-	var selectedValues = globals.ma_utl_showLkpWindow({ event: event, lookup: 'AG_Lkp_Sede', multiSelect: true, methodToAddFoundsetFilter: 'filterSede', selectedElements: globals.foundsetToArray(foundset, 'iddittasede') });
+	var selectedValues = globals.ma_utl_showLkpWindow(
+		{ 
+			event: event
+			, lookup: 'AG_Lkp_Sede'
+			, multiSelect: true
+			, methodToAddFoundsetFilter: 'filterSede'
+			, disabledElements : globals.foundsetToArray(foundset, 'iddittasede') 
+		}
+	);
 	if (selectedValues)
 		updateValues(selectedValues);
 }
 
 /**
  * @properties={typeid:24,uuid:"93BF8074-F891-4F12-942C-40472D4F023B"}
+ * @AllowToRunInFind
  */
 function filterSede(fs)
-{
+{	
+	if(!vCompanyID)
+	{
+		globals.ma_utl_showWarningDialog('Selezionare una ditta');
+		return null;
+	}
+	
+	/** @type {JSFoundSet<db:/ma_anagrafiche/ditte>} */
+	var fsDitte = databaseManager.getFoundSet(globals.Server.MA_ANAGRAFICHE,globals.Table.DITTE);
+	if(fsDitte.find())
+	{
+		fsDitte.idditta = vCompanyID;
+		if(fsDitte.search())
+		{
+			if(fsDitte.tipologia == globals.Tipologia.ESTERNA
+					&& fsDitte.ditte_to_ditte_legami.tipoesterni == 0)
+				vCompanyID = fsDitte.ditte_to_ditte_legami.iddittariferimento;
+		}
+	}
+	
 	if(fs)
 		fs.addFoundSetFilterParam('idditta', globals.ComparisonOperator.EQ, vCompanyID);
-	
+
 	return fs;
+}
+
+/**
+ * @AllowToRunInFind
+ *
+ * @properties={typeid:24,uuid:"1609823E-802A-4522-887C-0AB13B362589"}
+ */
+function getDitteFtr()
+{
+	/** @type{JSFoundSet<db:/ma_framework/sec_filtriditte>} */
+	var fsDitteFtr = databaseManager.getFoundSet(globals.Server.MA_FRAMEWORK,'sec_filtriditte');
+	if(fsDitteFtr.find())
+	   fsDitteFtr.search();
+	
+	if(fsDitteFtr.getSize())
+		return globals.foundsetToArray(fsDitteFtr,'idDitta')
+	else
+		return null;
 }
 
 /**
@@ -119,18 +192,18 @@ function updateValues(ids)
 		// Take all records which were not selected before
 		/** @type {Array}*/
 		var addList = ids.filter(function(sede){ return currentSelection.indexOf(sede) < 0; });
-		// Take all records no more selected
-		/** @type {Array}*/
-		var delList = currentSelection.filter(function(sede){ return ids.indexOf(sede) < 0; });
+//		// Take all records no more selected
+//		/** @type {Array}*/
+//		var delList = currentSelection.filter(function(sede){ return ids.indexOf(sede) < 0; });
 		
 		globals.ma_utl_startTransaction();
 		
-		if(fs.find())
-		{
-			fs.iddittasede = delList;
-			if(fs.search() > 0)
-				fs.deleteAllRecords();
-		}
+//		if(fs.find())
+//		{
+//			fs.iddittasede = delList;
+//			if(fs.search() > 0)
+//				fs.deleteAllRecords();
+//		}
 		
 		addList.forEach(
 			function(sede)

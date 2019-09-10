@@ -176,7 +176,7 @@ function updateLavoratore(lavoratore)
 		{
 			if (com_email && plugins.mail.isValidEmailAddress(com_email)) {
 				// costruzione intestazione e testo mail
-				var subject = "Presenza Semplice Studio Miazzo - Comunicazione avvenuta creazione utente";
+				var subject = "Presenza Semplice - Comunicazione avvenuta creazione utente";
 				var msgText = "plain msg<html>";
 				msgText += "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head>";
 				msgText += "<body>Gentile utente, <br/> con la presente le comunichiamo l\'avvenuto inserimento del proprio utente ";
@@ -184,12 +184,12 @@ function updateLavoratore(lavoratore)
 				msgText += "Nome utente : " + user_name + "<br/>";
 				msgText += "Password : " + userRandomPwd + "<br/>";
 				msgText += "Proprietario : " + sec_user_to_sec_owner.name + "<br/>";
-				msgText += "<br/><br/>Collegarsi all\'<a href='https://webapp.studiomiazzo.it/login.html'>applicazione</a> per l'accesso all'applicazione.<br/>"
+				msgText += "<br/><br/>Collegarsi all\'<a href='https://webapp.peoplegest.it/login.html'>applicazione</a> per l'accesso all'applicazione.<br/>"
 				msgText += "Si raccomanda di modificare la propria password dopo aver effettuato il primo accesso.</body></html>";
 
 				if (!plugins.mail.sendMail
 				(com_email,
-				'Creazione utenze <assistenza@studiomiazzo.it>',
+				'Creazione utenze <noreply@peoplegest.it>',
 				subject,
 				msgText,
 				null,
@@ -283,7 +283,7 @@ function updateLavoratori(lavoratori) {
 						{
 							if (recUser.com_email && plugins.mail.isValidEmailAddress(recUser.com_email)) {
 								// costruzione intestazione e testo mail
-								var subject = "Presenza Semplice Studio Miazzo - Comunicazione avvenuta creazione utente";
+								var subject = "Presenza Semplice - Comunicazione avvenuta creazione utente";
 								var msgText = "plain msg<html>";
 								msgText += "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head>";
 								msgText += "<body>Gentile utente, <br/> con la presente le comunichiamo l\'avvenuto inserimento del proprio utente ";
@@ -291,12 +291,12 @@ function updateLavoratori(lavoratori) {
 								msgText += "Nome utente : " + recUser.user_name + "<br/>";
 								msgText += "Password : " + userRandomPwd + "<br/>";
 								msgText += "Proprietario : " + recUser.sec_user_to_sec_owner.name + "<br/>";
-								msgText += "<br/><br/>Collegarsi all\'<a href='https://webapp.studiomiazzo.it/login.html'>applicazione</a> per l'accesso all'applicazione.<br/>"
+								msgText += "<br/><br/>Collegarsi all\'<a href='https://webapp.peoplegest.it/login.html'>applicazione</a> per l'accesso all'applicazione.<br/>"
 								msgText += "Si raccomanda di modificare la propria password dopo aver effettuato il primo accesso.</body></html>";
 
 								if (!plugins.mail.sendMail
 								(recUser.com_email,
-									'Creazione utenze <assistenza@studiomiazzo.it>',
+									'Creazione utenze <noreply@peoplegest.it>',
 									subject,
 									msgText,
 									null,
@@ -542,14 +542,14 @@ function sendAllCredentials(event)
 		if(mailAddress && plugins.mail.isValidEmailAddress(mailAddress))
 		{
 			var properties = globals.setSparkPostSmtpProperties();
-			var subject = "Presenza Semplice Studio Miazzo - Comunicazione credenziali per accesso all\'applicativo";
+			var subject = "Presenza Semplice - Comunicazione credenziali per accesso all\'applicativo";
 			var userName = rec.name_first_names && rec.name_last ? rec.name_first_names + " " + rec.name_last : rec.user_name
 			var msgText = "plain msg<html>";
 			msgText += "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head>";
 			msgText += "<body>Gentile <b>" + userName;
 			msgText += "</b>, <br/>";
-		    msgText += "con la presente le comunichiamo le credenziali per le richieste di <b>Ferie e permessi</b>. <br/>";
-		    msgText += "Per accedere, collegarsi al sito cliccando sul seguente <a href='https://webapp.studiomiazzo.it/login.html'>link</a> oppure digitando nel vostro browser l\'indirizzo https://webapp.studiomiazzo.it/login.html<br/>";
+		    msgText += "con la presente le comunichiamo le credenziali per l\'accesso all\'applicativo di <b>PresenzaSemplice</b>. <br/>";
+		    msgText += "Per accedere, collegarsi al sito cliccando sul seguente <a href='https://webapp.peoplegest.it/login.html'>link</a> oppure digitando nel vostro browser l\'indirizzo https://webapp.peoplegest.it/login.html<br/>";
 		    msgText += "<br/>";
 		    msgText += "Inserire le seguenti informazioni nei rispettivi campi : <br/>";
 		    msgText += "<br/>";
@@ -562,7 +562,7 @@ function sendAllCredentials(event)
 			
 			var success = plugins.mail.sendMail
 			(mailAddress,
-				'Gestore autorizzazioni <assistenza@studiomiazzo.it>',
+				'Gestore autorizzazioni <noreply@peoplegest.it>',
 				subject,
 				msgText,
 				null,
@@ -613,13 +613,13 @@ function sendCredentials(event)
 	if(mailAddress && plugins.mail.isValidEmailAddress(mailAddress))
 	{
 		var properties = globals.setSparkPostSmtpProperties();
-		var subject = "Presenza Semplice Studio Miazzo - Comunicazione credenziali per accesso all\'applicativo";
+		var subject = "Presenza Semplice - Comunicazione credenziali per accesso all\'applicativo";
 		var userName = rec.name_first_names && rec.name_last ? rec.name_first_names + " " + rec.name_last : rec.user_name
 		var msgText = "plain msg<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head>";
 		msgText += "<body>Gentile <b>" + userName;
 		msgText += "</b>, <br/>";
-	    msgText += "con la presente le comunichiamo le credenziali per le richieste di <b>Ferie e permessi</b>. <br/>";
-	    msgText += "Per accedere, collegarsi al sito cliccando sul seguente <a href='https://webapp.studiomiazzo.it/login.html'>link</a> oppure digitando nel vostro browser l\'indirizzo https://webapp.studiomiazzo.it/login.html<br/>";
+	    msgText += "con la presente le comunichiamo le credenziali per l\'accesso all\'applicativo di <b>PresenzaSemplice</b>. <br/>";
+	    msgText += "Per accedere, collegarsi al sito cliccando sul seguente <a href='https://webapp.peoplegest.it/login.html'>link</a> oppure digitando nel vostro browser l\'indirizzo https://webapp.peoplegest.it/login.html<br/>";
 	    msgText += "<br/>";
 	    msgText += "Inserire le seguenti informazioni nei rispettivi campi : <br/>";
 	    msgText += "<br/>";
@@ -630,9 +630,9 @@ function sendCredentials(event)
 	    msgText += "Le ricordiamo che potrà modificare la sua password una volta autenticato, tramite la funzionalità 'Cambia password'.<br/><br/>";
 	    msgText += "Cordiali saluti.</body></html>";
 		
-		var success = plugins.mail.sendMail
+	    var success = plugins.mail.sendMail
 		(mailAddress,
-			'Gestore autorizzazioni <assistenza@studiomiazzo.it>',
+			'Gestore autorizzazioni <noreply@peoplegest.it>',
 			subject,
 			msgText,
 			null,
@@ -651,4 +651,41 @@ function sendCredentials(event)
 		return;
 	}
 	
+}
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ * @override
+ *
+ * @properties={typeid:24,uuid:"820B958D-3C78-4226-8F42-A652A0B882FC"}
+ */
+function onActionEdit(event) 
+{
+	_super.onActionEdit(event)
+	
+	var frmMain = forms.ma_sec_main;
+	frmMain.elements.tab_users.enabled = frmMain.elements.lbl_users.enabled =
+		frmMain.elements.tab_keys.enabled = frmMain.elements.lbl_keys.enabled =
+			frmMain.elements.tab_owners.enabled = frmMain.elements.lbl_owners.enabled = false;
+}
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @private
+ * @override
+ *
+ * @properties={typeid:24,uuid:"B30728A1-3DFA-491A-B12C-F1ECBB8E6944"}
+ */
+function onActionConfirm(event) 
+{
+	_super.onActionConfirm(event)
+
+	var frmMain = forms.ma_sec_main;
+	frmMain.elements.tab_users.enabled = frmMain.elements.lbl_users.enabled =
+		frmMain.elements.tab_keys.enabled = frmMain.elements.lbl_keys.enabled =
+			frmMain.elements.tab_owners.enabled = frmMain.elements.lbl_owners.enabled = true;
 }

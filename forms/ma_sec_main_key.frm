@@ -119,7 +119,8 @@ name:"tab_groups",
 size:"104,25",
 transparent:true,
 typeid:7,
-uuid:"5819E815-B255-4433-AEEE-7DC80FC7F8A8"
+uuid:"5819E815-B255-4433-AEEE-7DC80FC7F8A8",
+visible:false
 },
 {
 anchors:3,
@@ -131,7 +132,8 @@ name:"tab_left_groups",
 size:"7,25",
 transparent:true,
 typeid:7,
-uuid:"5A344E2B-838D-4D92-AB30-4884C763C57C"
+uuid:"5A344E2B-838D-4D92-AB30-4884C763C57C",
+visible:false
 },
 {
 extendsID:"142AF683-774C-4E3D-ABB9-EAC8B7D9C13B",
@@ -230,7 +232,8 @@ size:"111,23",
 text:"Gruppi classificazioni",
 transparent:true,
 typeid:7,
-uuid:"723E1F00-C007-4629-B8DB-5DDFD4FF160C"
+uuid:"723E1F00-C007-4629-B8DB-5DDFD4FF160C",
+visible:false
 },
 {
 extendsID:"0056D62D-DDC3-4D3C-8208-A6D5963F2945",
@@ -273,7 +276,8 @@ name:"tab_right_groups",
 size:"7,25",
 transparent:true,
 typeid:7,
-uuid:"D07A1BF5-51E0-4EB6-83F7-24A6959EA5C6"
+uuid:"D07A1BF5-51E0-4EB6-83F7-24A6959EA5C6",
+visible:false
 },
 {
 extendsID:"5240C8A9-973D-412D-9A6C-76C247CCC724",

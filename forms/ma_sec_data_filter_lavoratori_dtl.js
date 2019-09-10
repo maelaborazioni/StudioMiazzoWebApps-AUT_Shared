@@ -55,7 +55,34 @@ function selectNone(event)
 	{
 		globals.ma_utl_startTransaction();
 		
-		foundset.deleteAllRecords();
+		foundset.deleteRecord();
+		
+		globals.ma_utl_commitTransaction();
+	}
+	catch(error)
+	{
+		globals.ma_utl_rollbackTransaction();
+		globals.ma_utl_logError(error, LOGGINGLEVEL.ERROR);
+		globals.ma_utl_showErrorDialog(error.message);
+	}
+}
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @protected
+ *
+ * @properties={typeid:24,uuid:"2D696A12-D63A-45DD-8F7A-CBC61838DAAE"}
+ */
+function deleteSelected(event)
+{
+	try
+	{
+		globals.ma_utl_startTransaction();
+		
+		foundset.deleteRecord();
 		
 		globals.ma_utl_commitTransaction();
 	}
@@ -89,7 +116,7 @@ function selectValues(event)
 		                                                lookup: 'AG_Lkp_Lavoratori',
 														multiSelect: true,
 														methodToAddFoundsetFilter: 'filterLavoratori',
-														selectedElements: globals.foundsetToArray(foundset, 'idlavoratore') });
+														disabledElements: globals.foundsetToArray(foundset, 'idlavoratore') });
 	if (selectedValues)
 		updateValues(selectedValues);
 }
@@ -134,18 +161,18 @@ function updateValues(ids)
 		// Take all records which were not selected before
 		/** @type {Array}*/
 		var addList = ids.filter(function(lavoratore){ return currentSelection.indexOf(lavoratore) < 0; });
-		// Take all records no more selected
-		/** @type {Array}*/
-		var delList = currentSelection.filter(function(lavoratore){ return ids.indexOf(lavoratore) < 0; });
+//		// Take all records no more selected
+//		/** @type {Array}*/
+//		var delList = currentSelection.filter(function(lavoratore){ return ids.indexOf(lavoratore) < 0; });
 		
 		globals.ma_utl_startTransaction();
 		
-		if(fs.find())
-		{
-			fs.idlavoratore = delList;
-			if(fs.search() > 0)
-				fs.deleteAllRecords();
-		}
+//		if(fs.find())
+//		{
+//			fs.idlavoratore = delList;
+//			if(fs.search() > 0)
+//				fs.deleteAllRecords();
+//		}
 		
 		addList.forEach(
 			function(lavoratore)

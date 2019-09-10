@@ -117,32 +117,32 @@ function updateValues(ids)
 	try
 	{
 		var form = forms[elements.values.getTabFormNameAt(1)];
-		/** @type {JSFoundSet<db:/ma_framework/sec_filtrigruppiclassificazionidettaglio>} */
+		/** @type {JSFoundSet<db:/ma_framework/sec_filtriclassificazioni>} */
 		var fs   = form.foundset.duplicateFoundSet();
 		
-		var currentSelection = globals.foundsetToArray(form.foundset, 'idgruppoclassificazionedettaglio');
+		var currentSelection = globals.foundsetToArray(form.foundset, 'idclassificazione');
 		
 		// Take all records which were not selected before
 		/** @type {Array}*/
-		var addList = ids.filter(function(gruppoClassifDett){ return currentSelection.indexOf(gruppoClassifDett) < 0; });
+		var addList = ids.filter(function(gruppoClassif){ return currentSelection.indexOf(gruppoClassif) < 0; });
 		// Take all records no more selected
 		/** @type {Array}*/
-		var delList = currentSelection.filter(function(gruppoClassifDett){ return ids.indexOf(gruppoClassifDett) < 0; });
+		var delList = currentSelection.filter(function(gruppoClassif){ return ids.indexOf(gruppoClassif) < 0; });
 		
 		globals.ma_utl_startTransaction();
 		
 		if(fs.find())
 		{
-			fs.idgruppoclassificazionedettaglio = delList;
+			fs.idclassificazione = delList;
 			if(fs.search() > 0)
 				fs.deleteAllRecords();
 		}
 		
 		addList.forEach(
-			function(idGruppoClassifDett)
+			function(idGruppoClassif)
 			{ 
 				fs.newRecord(); 
-				fs.idgruppoclassificazionedettaglio = idGruppoClassifDett; 
+				fs.idclassificazione = idGruppoClassif; 
 			}
 		);
 		

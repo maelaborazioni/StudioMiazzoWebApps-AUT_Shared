@@ -79,7 +79,7 @@ function process_check_password(_event)
 			if(mailAddress && plugins.mail.isValidEmailAddress(mailAddress))
 			{
 				var properties = globals.setSparkPostSmtpProperties();
-				var subject = "Presenza Semplice Studio Miazzo - Comunicazione nuova password per accesso all\'applicativo";
+				var subject = "Presenza Semplice - Comunicazione nuova password per accesso all\'applicativo";
 				var userName = rec.name_first_names && rec.name_last ? rec.name_first_names + " " + rec.name_last : rec.user_name
 				var msgText = "plain msg<html>";
 				msgText += "<head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"></head>";
@@ -92,7 +92,7 @@ function process_check_password(_event)
 				
 				var success = plugins.mail.sendMail
 				(mailAddress,
-					'Gestore autorizzazioni <assistenza@studiomiazzo.it>',
+					'Gestore autorizzazioni <noreply@peoplegest.it>',
 					subject,
 					msgText,
 					null,
