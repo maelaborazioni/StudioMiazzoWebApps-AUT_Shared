@@ -13,6 +13,13 @@ var RestServerLink = ''
 var RfpServerLink = '';
 
 /**
+ * @type {String}
+ *
+ * @properties={typeid:35,uuid:"CBC28B64-5D17-4AF6-948B-C2A0588E2037"}
+ */
+var SelfServerLink = '';
+
+/**
  * @properties={typeid:35,uuid:"C5103CFD-953A-48CF-AE77-6ADE59BB1B6A",variableType:-4}
  */
 var is_cas_authenticated = false;
@@ -53,7 +60,7 @@ function ma_sec_logout()
 	}
 	application.setUserProperty(application.getSolutionName() +'.connected','false')
 	
-	var url = RfpServerLink + "/servoy-webclient/ss/s/" + _solution;
+	var url = SelfServerLink + (_solution == 'PresenzaSempliceLite' ? "/loginpsl.html" : "/login.html");
 	application.showURL(url,'_self');
 		
 	security.logout(_solution);
@@ -426,7 +433,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		
 		// MODIFY THIS VARIABLE ONLY FOR DEVELOPMENT
 		// DEFAULT CASE IS "ENVIRONMENT_CASE = ENVIRONMENT.PRODUCTION";
-		ENVIRONMENT_CASE = ENVIRONMENT.PRODUCTION;
+		ENVIRONMENT_CASE = ENVIRONMENT.DEBUG_DIRECT;
  		// MODIFY THIS VARIABLE ONLY FOR DEVELOPMENT
 		// DEFAULT CASE IS "WS_DOTNET_CASE = WS_DOTNET.v4";
 		WS_DOTNET_CASE = WS_DOTNET.CORE;
@@ -437,17 +444,19 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		switch(ENVIRONMENT_CASE)
 		{
 			// produzione 
-			case ENVIRONMENT.PRODUCTION:
+			case ENVIRONMENT.PRODUCTION :
 				RestServerLink = 'http://srv-epiweb';
-				RfpServerLink = 'https://webapp.studiomiazzo.it';
-			   	LinkedServer.SRV_SEDE = 'SRV-DB01';
+				SelfServerLink = 'https://webapp.peoplegest.it';
+			   	RfpServerLink = 'https://api.peoplegest.it'
+				LinkedServer.SRV_SEDE = 'SRV-DB01';
 				break;
 				
 			// test esterno
 			case ENVIRONMENT.TEST :		
 				RestServerLink = 'http://srv-epiweb-dev';
-				RestServerLink = 'http://10.255.255.20'; // non risolve più il nome...
+				//RestServerLink = 'http://10.255.255.20'; // non risolve più il nome...
 				RfpServerLink = 'http://213.92.43.92:8080';
+				SelfServerLink = 'http://213.92.43.92:8080';
 				LinkedServer.SRV_SEDE = 'SRV-EPIWEB-DEV';
 			    break; 
 	
@@ -455,6 +464,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 			case ENVIRONMENT.DEBUG :
 				RestServerLink = 'http://srv-epiweb-d';
 				RfpServerLink = 'http://localhost:8080';
+				SelfServerLink = 'http://localhost:8080';
 				LinkedServer.SRV_SEDE = 'SRV-DB03\DEVEL';
 				break;
 				
@@ -462,13 +472,15 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 			case ENVIRONMENT.DEBUG_VB6 :
 				RestServerLink = 'http://srv-dev-t';
 				RfpServerLink = 'http://localhost:8080';
+				SelfServerLink = 'http://localhost:8080';
 				LinkedServer.SRV_SEDE = 'SRV-DB03\DEVEL';
 				break;
 				
 			// debug diretto su produzione
 			case ENVIRONMENT.DEBUG_DIRECT :
 				RestServerLink = 'http://srv-epiweb';
-				RfpServerLink = 'https://webapp.studiomiazzo.it';
+				SelfServerLink = 'http://localhost:8080';
+				RfpServerLink = 'https://api.peoplegest.it'
 			    LinkedServer.SRV_SEDE = 'SRV-DB03\DEVEL';
 			    break;
 			    
@@ -476,6 +488,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 			case ENVIRONMENT.DEVELOPING:
 				RestServerLink = 'http://localhost:53927';
 				RfpServerLink = 'http://localhost:8080';
+				SelfServerLink = 'http://localhost:8080';
 				LinkedServer.SRV_SEDE = 'SRV-DB03\DEVEL';
 			    break;
 					    
@@ -506,15 +519,16 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		        WS_STORICO_URL = RestServerLink +'/Leaf_Storico';
 		        WS_OP_URL = RestServerLink +'/Leaf_Operations';
 		        WS_NL_URL = RestServerLink + '/Leaf_NL';
+		        WS_TRACK_EXT_URL = RestServerLink + '/Leaf_Tracks';
 		        break;
 			case ENVIRONMENT.DEBUG_VB6:
 			case ENVIRONMENT.DEBUG:
 			case ENVIRONMENT.DEBUG_DIRECT:	
-				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_REPORT_GIORNALIERA_URL = WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = RestServerLink + '/Leaf_Test';
+				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_REPORT_GIORNALIERA_URL = WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = WS_TRACK_EXT_URL = RestServerLink + '/Leaf_Test';
 				break;
 			case ENVIRONMENT.DEVELOPING:
 				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_REPORT_GIORNALIERA_URL =
-				WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = RestServerLink + '/';
+				WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = WS_TRACK_EXT_URL = RestServerLink //+ '/';
 				break;
 		}
 		
@@ -1228,12 +1242,16 @@ function ma_sec_removeUsersFilters()
  */
 function ma_sec_removeDataFilters()
 {
-	databaseManager.removeTableFilterParam(globals.Server.SVY_FRAMEWORK,'ftr_dati_ditte_incluse');
-	databaseManager.removeTableFilterParam(globals.Server.SVY_FRAMEWORK,'ftr_dati_ditte_escluse');
-	databaseManager.removeTableFilterParam(globals.Server.SVY_FRAMEWORK,'ftr_dati_lavoratori_inclusi');
-	databaseManager.removeTableFilterParam(globals.Server.SVY_FRAMEWORK,'ftr_dati_lavoratori_esclusi');
-	databaseManager.removeTableFilterParam(globals.Server.SVY_FRAMEWORK,'ftr_dati_lavoratori_testa_inclusi');
-	databaseManager.removeTableFilterParam(globals.Server.SVY_FRAMEWORK,'ftr_dati_lavoratori_testa_esclusi');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_ditte_incluse');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_ditte_escluse');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_lavoratori_inclusi');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_lavoratori_esclusi');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_lavoratori_testa_inclusi');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_lavoratori_testa_esclusi');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_sedi_lavoro_incluse');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_sedi_lavoro_escluse');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_classif_dett_inclusi');
+	databaseManager.removeTableFilterParam(globals.Server.MA_ANAGRAFICHE,'ftr_dati_classif_dett_esclusi');
 }
 
 /**
@@ -1252,83 +1270,32 @@ function ma_sec_setDataFilters()
 {
 	// rimuovi eventuali filtri precedenti per partire da una situazione pulita
 	ma_sec_removeDataFilters();
-	
+		
 	// imposta i filtri (se esistono) relativi alle ditte
 	var ditte_incluse = [], ditte_escluse = [];
-	
-	var sqlDitteQuery = "SELECT DISTINCT \
-	                     idDitta \
-	                     FROM Sec_FiltriDitte \
-	                     WHERE security_key_id IN (" + globals.nav.keys + ") \
-	                     AND exclude = ?";
-							 
-	/**
-	 * Popola l'array delle ditte da includere
-	 */
-	var dataset  = databaseManager.getDataSetByQuery(globals.Server.MA_FRAMEWORK, sqlDitteQuery, [0], -1);
-	if (dataset && dataset.getMaxRowIndex() > 0)
-		ditte_incluse = dataset.getColumnAsArray(1);
-	
-	/**
-	 * Popola l'array delle ditte da escludere
-	 */
-	   dataset = databaseManager.getDataSetByQuery(globals.Server.MA_FRAMEWORK, sqlDitteQuery, [1], -1);
-	if(dataset && dataset.getMaxRowIndex() > 0)
-		ditte_escluse = dataset.getColumnAsArray(1);
 	
 	// imposta i filtri (se esistono) relativi ai lavoratori
 	var lavoratori_inclusi = [], lavoratori_esclusi = [];
 	
-	var sqlQuery = "SELECT DISTINCT \
-						idLavoratore \
-					FROM \
-						V_Sec_FiltriLavoratori \
-					WHERE \
-						idChiave IN(" + globals.nav.keys + ") \
-						AND exclude = ?;"
-		
-	/**
-	 * Popola l'array dei lavoratori da includere
-	 */
-	dataset  = databaseManager.getDataSetByQuery(globals.getSwitchedServer(globals.Server.MA_FRAMEWORK), sqlQuery, [0], -1);
-	if (dataset && dataset.getMaxRowIndex() > 0)
-		lavoratori_inclusi = dataset.getColumnAsArray(1);
+	// imposta i filtri (se esistono) relativi alle sedi di lavoro
+	var sedi_incluse = [], sedi_escluse = [];
 	
-	/**
-	 * Popola l'array dei lavoratori da escludere
-	 */
-	   dataset = databaseManager.getDataSetByQuery(globals.getSwitchedServer(globals.Server.MA_FRAMEWORK), sqlQuery, [1], -1);
-	if(dataset && dataset.getMaxRowIndex() > 0)
-		lavoratori_esclusi = dataset.getColumnAsArray(1);
-		
-	// imposta i filtri (se esistono) relativi alle/i organizzazioni/gruppi dell'organigramma
-	sqlQuery = "SELECT distinct\
-					sutl.idLavoratore\
-				FROM\
-					sec_group_filter sgf\
-					INNER JOIN sec_user_in_group sug\
-						ON sug.group_id = sgf.group_id\
-					INNER JOIN sec_user_org suo\
-						ON suo.user_org_id = sug.user_org_id\
-					INNER JOIN sec_user_to_lavoratori sutl\
-						ON sutl.user_id = suo.user_id\
-					WHERE\
-						sgf.security_key_id IN(" + globals.nav.keys + ")\
-						AND sgf.exclude = ?;"
-						
-	/**
-	 * Aggiungi i filtri sulle/i organizzazioni/gruppi servoy in inclusione
-	 */
-	dataset = databaseManager.getDataSetByQuery(globals.Server.SVY_FRAMEWORK, sqlQuery, [0], -1);
-	if(dataset && dataset.getMaxRowIndex() > 0)
-		lavoratori_inclusi = lavoratori_inclusi.concat(dataset.getColumnAsArray(1));
+	// imposta i filtri (se esistono) relativi ai dettagli delle classificazioni
+	var dett_classificazioni_inclusi = [], dett_classificazioni_esclusi = [];
 	
-	/**
-	 * Aggiungi i filtri sui gruppi servoy in esclusione
-	 */
-	dataset = databaseManager.getDataSetByQuery(globals.Server.SVY_FRAMEWORK, sqlQuery, [1], -1);
-	if(dataset && dataset.getMaxRowIndex() > 0)
-		lavoratori_esclusi = lavoratori_esclusi.concat(dataset.getColumnAsArray(1));
+	ditte_incluse = getDitteFiltri(false);
+	ditte_escluse = getDitteFiltri(true);
+	
+	lavoratori_inclusi = getLavoratoriFiltri(false);
+	lavoratori_esclusi = getLavoratoriFiltri(true);
+	
+	sedi_incluse = getSediLavoroFiltri(false);
+	sedi_escluse = getSediLavoroFiltri(true);
+	
+	dett_classificazioni_inclusi = getClassificazioniDettaglioFiltri(false);
+	dett_classificazioni_esclusi = getClassificazioniDettaglioFiltri(true);
+	
+	// TODO aggiungere filtri su sedi lavoro e centri di costo
 	
 	/**
 	 * Applica i filtri
@@ -1399,6 +1366,228 @@ function ma_sec_setDataFilters()
 			'ftr_dati_lavoratori_testa_esclusi'
 		);
 	}
+	
+	if(sedi_incluse && sedi_incluse.length)
+	{
+		databaseManager.addTableFilterParam
+		(
+			globals.Server.MA_ANAGRAFICHE,
+			globals.Table.DITTE_SEDI,
+			'iddittasede',
+			globals.ComparisonOperator.IN,
+			sedi_incluse,
+			'ftr_dati_sedi_lavoro_incluse'
+		);
+	}
+	
+	if(sedi_escluse && sedi_escluse.length)
+	{
+		databaseManager.addTableFilterParam
+		(
+			globals.Server.MA_ANAGRAFICHE,
+			globals.Table.DITTE_SEDI,
+			'iddittasede',
+			globals.ComparisonOperator.NIN,
+			sedi_escluse,
+			'ftr_dati_sedi_lavoro_escluse'
+		);
+	}
+	
+	if(dett_classificazioni_inclusi && dett_classificazioni_inclusi.length)
+	{
+		databaseManager.addTableFilterParam
+		(
+			globals.Server.MA_ANAGRAFICHE,
+			globals.Table.DITTE_CLASSIFICAZIONI_DETTAGLIO,
+			'iddittaclassificazionedettaglio',
+			globals.ComparisonOperator.IN,
+			dett_classificazioni_inclusi,
+			'ftr_dati_classif_dett_inclusi'
+		);
+	}
+	
+	if(dett_classificazioni_esclusi && dett_classificazioni_esclusi.length)
+	{
+		databaseManager.addTableFilterParam
+		(
+			globals.Server.MA_ANAGRAFICHE,
+			globals.Table.DITTE_CLASSIFICAZIONI_DETTAGLIO,
+			'iddittaclassificazionedettaglio',
+			globals.ComparisonOperator.NIN,
+			dett_classificazioni_esclusi,
+			'ftr_dati_classif_dett_esclusi'
+		);
+	}
+}
+
+/**
+ * Restituisce gli id delle ditte incluse/escluse in base ai filtri impostati a livello di framework
+ * 
+ * @param {Boolean} escluse
+ *
+ * @properties={typeid:24,uuid:"22FD0885-5207-4E43-92F8-3DB076B8B29D"}
+ */
+function getDitteFiltri(escluse)
+{
+	var sqlDitteQuery = '';
+	var arrDitte = [];
+    var dataset;
+    
+	if(escluse)
+	{
+		/**
+		* Popola l'array delle ditte da escludere
+		*/
+		sqlDitteQuery = "SELECT DISTINCT \
+		    idDitta \
+		    FROM V_Sec_FiltriDitteEscluse \
+		    WHERE idChiave IN (" + globals.nav.keys + ")";
+		
+		dataset = databaseManager.getDataSetByQuery(globals.Server.MA_ANAGRAFICHE, sqlDitteQuery, null, -1);
+		if(dataset && dataset.getMaxRowIndex() > 0)
+		arrDitte = dataset.getColumnAsArray(1);
+	}
+	else
+	{
+		sqlDitteQuery = "SELECT DISTINCT \
+	        idDitta \
+	        FROM V_Sec_FiltriDitte \
+	        WHERE idChiave IN (" + globals.nav.keys + ")";
+					 
+		/**
+		* Popola l'array delle ditte da includere
+		*/
+		dataset  = databaseManager.getDataSetByQuery(globals.Server.MA_ANAGRAFICHE, sqlDitteQuery, null, -1);
+		if (dataset && dataset.getMaxRowIndex() > 0)
+		arrDitte = dataset.getColumnAsArray(1);
+	}
+	
+	return arrDitte;
+}
+
+/**
+ * Restituisce gli id dei lavoratori inclusi/esclusi in base ai filtri impostati a livello di framework
+ * e/o sulla base dell'organigramma aziendale
+ * 
+ * @param {Boolean} esclusi
+ *
+ * @properties={typeid:24,uuid:"3EDE1425-C868-49CF-A77A-945C8155B581"}
+ */
+function getLavoratoriFiltri(esclusi)
+{	
+	var sqlQueryFtr = '';
+	var sqlQueryAuth = '';
+	var arrLavoratori = [];
+	var dataset;
+	
+	sqlQueryFtr = "SELECT DISTINCT \
+						idLavoratore \
+					FROM \
+						V_Sec_FiltriLavoratori \
+					WHERE \
+						idChiave IN (" + globals.nav.keys + ") \
+						AND exclude = ?;"
+	
+	// imposta i filtri (se esistono) relativi alle/i organizzazioni/gruppi dell'organigramma
+	sqlQueryAuth = "SELECT distinct \
+					sutl.idLavoratore \
+				FROM \
+					sec_group_filter sgf \
+					INNER JOIN sec_user_in_group sug \
+						ON sug.group_id = sgf.group_id \
+					INNER JOIN sec_user_org suo \
+						ON suo.user_org_id = sug.user_org_id \
+					INNER JOIN sec_user_to_lavoratori sutl \
+						ON sutl.user_id = suo.user_id \
+					WHERE \
+						sgf.security_key_id IN (" + globals.nav.keys + ") \
+						AND sgf.exclude = ?;"
+	
+	if(esclusi)
+	{
+		/**
+		 * Popola l'array dei lavoratori da escludere
+		 */
+		   dataset = databaseManager.getDataSetByQuery(globals.getSwitchedServer(globals.Server.MA_ANAGRAFICHE), sqlQueryFtr, [1], -1);
+		if(dataset && dataset.getMaxRowIndex() > 0)
+			arrLavoratori = dataset.getColumnAsArray(1);
+
+		/**
+		 * Aggiungi i filtri sui gruppi servoy in esclusione
+		 */
+		dataset = databaseManager.getDataSetByQuery(globals.Server.SVY_FRAMEWORK, sqlQueryAuth, [1], -1);
+		if(dataset && dataset.getMaxRowIndex() > 0)
+			arrLavoratori = arrLavoratori.concat(dataset.getColumnAsArray(1));
+
+	}
+	else
+	{
+		/**
+		 * Popola l'array dei lavoratori da includere
+		 */
+		dataset  = databaseManager.getDataSetByQuery(globals.getSwitchedServer(globals.Server.MA_ANAGRAFICHE), sqlQueryFtr, [0], -1);
+		if (dataset && dataset.getMaxRowIndex() > 0)
+			arrLavoratori = dataset.getColumnAsArray(1);
+
+		/**
+		 * Aggiungi i filtri sulle/i organizzazioni/gruppi servoy in inclusione
+		 */
+		dataset = databaseManager.getDataSetByQuery(globals.Server.SVY_FRAMEWORK, sqlQueryAuth, [0], -1);
+		if(dataset && dataset.getMaxRowIndex() > 0)
+			arrLavoratori = arrLavoratori.concat(dataset.getColumnAsArray(1));
+	}
+	
+	return arrLavoratori;
+}
+
+/**
+ * Restituisce gli id delle sedi di lavoro incluse/escluse in base ai filtri impostati a livello di framework
+ * 
+ * @param {Boolean} escluse
+ *
+ * @properties={typeid:24,uuid:"69945A19-C721-4C73-9E23-A534CFBE93AA"}
+ */
+function getSediLavoroFiltri(escluse)
+{
+	var arrSediLavoro =[];
+	var sqlQuery = 'SELECT distinct \
+						idDittaSede \
+				    FROM \
+				    	V_Sec_FiltriSediLavoro \
+				    WHERE \
+				    	idChiave IN (' + globals.nav.keys + ') \
+				    AND \
+				    	exclude = ?';
+	var dataset = databaseManager.getDataSetByQuery(globals.getSwitchedServer(globals.Server.MA_ANAGRAFICHE), sqlQuery, [escluse ? 1 : 0], -1);
+	if(dataset && dataset.getMaxRowIndex() > 0)
+		arrSediLavoro = dataset.getColumnAsArray(1);
+	
+	return arrSediLavoro;
+}
+
+/**
+ * Restituisce gli id dei dettagli di classificazione inclusi/esclusi in base ai filtri impostati a livello di framework
+ * 
+ * @param {Boolean} escluse
+ *
+ * @properties={typeid:24,uuid:"A293ACF2-C144-4954-87EE-E5AECE019BC5"}
+ */
+function getClassificazioniDettaglioFiltri(escluse)
+{
+	var arrClassificazioniDettaglio = [];
+	var sqlQuery = 'SELECT distinct \
+					   idClassificazione \
+					FROM \
+					   V_Sec_FiltriClassificazioni \
+					WHERE \
+					    idChiave IN (' + globals.nav.keys + ') \
+					AND \
+					   exclude = ?';	
+	var dataset = databaseManager.getDataSetByQuery(globals.getSwitchedServer(globals.Server.MA_ANAGRAFICHE), sqlQuery, [escluse ? 1 : 0], -1);
+	if(dataset && dataset.getMaxRowIndex() > 0)
+		arrClassificazioniDettaglio = dataset.getColumnAsArray(1);
+	
+	return arrClassificazioniDettaglio;
 }
 
 /**
