@@ -453,6 +453,22 @@ typeid:7,
 uuid:"CFC3449A-7DDE-4805-B0D8-A74E8C68AC55"
 },
 {
+formIndex:13804,
+location:"860,267",
+name:"btn_test_auth",
+onActionMethodID:"61A4A1EB-60AD-4435-B434-A4D5431CD3A2",
+onDoubleClickMethodID:"-1",
+onRightClickMethodID:"-1",
+rolloverCursor:12,
+showClick:false,
+size:"115,20",
+styleClass:"btn_invia",
+text:"Test auth",
+typeid:7,
+uuid:"CFE028AC-426A-43F9-A5DD-ADE9B274B43B",
+visible:false
+},
+{
 location:"209,5",
 mediaOptions:2,
 name:"btn_send_all_credentials",

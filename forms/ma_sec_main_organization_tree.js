@@ -411,12 +411,11 @@ function onShow(firstShow, event)
 
 	// la visualizzazione dei tab di gestione di ruoli/utenti per il ferie e permessi è
 	// legata al possesso del modulo stesso
-	var rp = globals.ma_utl_hasKey(globals.Key.RICHIESTA_PERMESSI); 
+	var rp = globals.ma_utl_hasModule(globals.Module.FERIE_PERMESSI); 
 	elements.tab_rp_groups.visible = 
 		elements.tab_rp_users.visible =
 			elements.btn_add_rp_group.visible =
-				elements.btn_add_rp_user.visible = rp;
-	
+				elements.btn_add_rp_user.visible = rp;	
 }
 
 /**

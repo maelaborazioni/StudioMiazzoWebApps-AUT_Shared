@@ -689,3 +689,64 @@ function onActionConfirm(event)
 		frmMain.elements.tab_keys.enabled = frmMain.elements.lbl_keys.enabled =
 			frmMain.elements.tab_owners.enabled = frmMain.elements.lbl_owners.enabled = true;
 }
+
+/**
+ * Perform the element default action.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @private
+ *
+ * @properties={typeid:24,uuid:"61A4A1EB-60AD-4435-B434-A4D5431CD3A2"}
+ */
+function onActionBtnAuth(event) 
+{
+	var url = "http://srv-epiweb-dev/Calendar/api/DiagnosticAuth32/TestAuth";
+	var client = globals.getHttpClient();
+	var request = client.createGetRequest(url);
+	request.addHeader('Content-type','application/json');
+	
+	request.usePreemptiveAuthentication(true);
+	
+	var bearerToken = scopes.auth._accessToken;
+	
+	request.addHeader('Authorization','Bearer ' + bearerToken);
+	
+	var response = request.executeRequest();
+	if (response)
+	{
+		// We always expect a Json result
+		var responseBody = response.getResponseBody();
+		var responseObj  = plugins.serialize.fromJSON(responseBody);
+		var statusCode   = response.getStatusCode();
+		
+		switch (statusCode)
+		{
+			case globals.HTTPStatusCode.OK:
+				break;
+			case globals.HTTPStatusCode.INTERNAL_ERROR:
+			break;	
+			case globals.HTTPStatusCode.UNAUTHORIZED:
+//			msg = 'L\'utente non dispone delle autorizzazioni necessarie';
+			break;
+			case globals.HTTPStatusCode.FORBIDDEN:
+//			msg = 'L\'utente non dispone delle autorizzazioni necessarie';
+			break;
+			case globals.HTTPStatusCode.NOT_FOUND:
+//			msg = 'La risorsa richiesta non esiste: ' + url;
+			break;
+		
+		default:
+//			msg = 'Errore sconosciuto, codice di risposta: ' + statusCode + '.\nContattare il servizio di assistenza.';
+			break;			
+		}
+	
+		//globals.ma_utl_showInfoDialog(responseObj.Message);
+		return responseObj;
+	}
+	else
+	{
+		globals.ma_utl_showErrorDialog('<html>Il server non risponde alla richiesta.<br/>Controllare l\'accesso ad internet, effettuare nuovamente il login e, se il problema persiste, contattare il servizio di assistenza.</html>', 'i18n:svy.fr.lbl.excuse_me');
+	    return { ReturnValue: false, message: 'Il server non risponde, riprovare' };
+	}		
+}

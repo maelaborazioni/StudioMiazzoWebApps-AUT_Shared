@@ -44,9 +44,8 @@ function deleteRecord(event)
                where SUIG.group_id = ?\
                and SUIG.user_in_group_id = ?";
 	var success = plugins.rawSQL.executeSQL(globals.Server.SVY_FRAMEWORK,
-                                            'sec_user_in_group',
-		                                     sql,
-		                                     [foundset.group_id,foundset.user_in_group_id]);
+   	                                        sql,
+		                                    [foundset.group_id,foundset.user_in_group_id]);
 	if(success)
 		plugins.rawSQL.flushAllClientsCache(globals.Server.SVY_FRAMEWORK,'sec_user_in_group');
 	else

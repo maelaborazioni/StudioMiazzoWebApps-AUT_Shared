@@ -388,11 +388,9 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		var ownerdb = _to_sec_organization$lgn.sec_organization_to_sec_owner && _to_sec_organization$lgn.sec_organization_to_sec_owner.database_name;
 		if (ownerdb)
 		{
-			var clientDB = ownerdb;
-			
 			_tipoConnessione = globals.Connessione.CLIENTE;
 			
-			globals.customer_dbserver_name = 'Cliente_' + clientDB;
+			globals.customer_dbserver_name = 'Cliente_' + ownerdb;
 			globals.customer_db_name = databaseManager.getDataSetByQuery(globals.customer_dbserver_name, "SELECT DB_NAME()", null, -1).getValue(1, 1);
 				
 			success = 			 databaseManager.switchServer(globals.Server.MA_PRESENZE, customer_dbserver_name);
@@ -433,7 +431,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		
 		// MODIFY THIS VARIABLE ONLY FOR DEVELOPMENT
 		// DEFAULT CASE IS "ENVIRONMENT_CASE = ENVIRONMENT.PRODUCTION";
-		ENVIRONMENT_CASE = ENVIRONMENT.DEBUG_DIRECT;
+		ENVIRONMENT_CASE = ENVIRONMENT.PRODUCTION;
  		// MODIFY THIS VARIABLE ONLY FOR DEVELOPMENT
 		// DEFAULT CASE IS "WS_DOTNET_CASE = WS_DOTNET.v4";
 		WS_DOTNET_CASE = WS_DOTNET.CORE;
@@ -445,6 +443,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		{
 			// produzione 
 			case ENVIRONMENT.PRODUCTION :
+				server_db_name = 'srv-epiweb';
 				RestServerLink = 'http://srv-epiweb';
 				SelfServerLink = 'https://webapp.peoplegest.it';
 			   	RfpServerLink = 'https://api.peoplegest.it'
@@ -453,6 +452,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 				
 			// test esterno
 			case ENVIRONMENT.TEST :		
+				server_db_name = 'srv-epiweb-dev';
 				RestServerLink = 'http://srv-epiweb-dev';
 				//RestServerLink = 'http://10.255.255.20'; // non risolve più il nome...
 				RfpServerLink = 'http://213.92.43.92:8080';
@@ -462,6 +462,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 	
 			// debug standard
 			case ENVIRONMENT.DEBUG :
+				server_db_name = 'srv-epiweb-d';
 				RestServerLink = 'http://srv-epiweb-d';
 				RfpServerLink = 'http://localhost:8080';
 				SelfServerLink = 'http://localhost:8080';
@@ -478,6 +479,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 				
 			// debug diretto su produzione
 			case ENVIRONMENT.DEBUG_DIRECT :
+				server_db_name = 'srv-epiweb';
 				RestServerLink = 'http://srv-epiweb';
 				SelfServerLink = 'http://localhost:8080';
 				RfpServerLink = 'https://api.peoplegest.it'
@@ -486,6 +488,7 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 			    
 			// debug locale
 			case ENVIRONMENT.DEVELOPING:
+			    server_db_name = 'srv-epiweb-dev';
 				RestServerLink = 'http://localhost:53927';
 				RfpServerLink = 'http://localhost:8080';
 				SelfServerLink = 'http://localhost:8080';
@@ -499,36 +502,63 @@ function ma_sec_onSolutionOpen(arg, queryParams)
 		}
 		
 		// settaggio url per web service
+		WS_OPERATION = RestServerLink + '/Operation/api';
+        WS_CALENDAR = RestServerLink + '/Calendar/api';
+        WS_CERTIFICATE = RestServerLink + '/Certificate/api';
+        WS_EVENT = RestServerLink + '/Event/api';
+        WS_LU = RestServerLink + '/Lu/api';
+        WS_NL = RestServerLink + '/NL/api';
+        WS_PRESENCE = RestServerLink + '/Presence/api';
+        WS_PV = RestServerLink + '/PV/api';
+        
+//        WS_PV = 'https://localhost:44366/api';
+        
+        WS_REPORT = RestServerLink + '/Report/api';
+        WS_STAMPING = RestServerLink + '/Stamping/api';
+        WS_REGISTRY = RestServerLink + '/Registry/api';
+        WS_JOB_SCHEDULER = RestServerLink + '/Tasks/api';        
+        
 		switch(ENVIRONMENT_CASE)
 		{
 			case ENVIRONMENT.PRODUCTION:
 			case ENVIRONMENT.DEBUG_DIRECT:
-			case ENVIRONMENT.TEST:	
-				WS_URL = RestServerLink + '/Leaf_Single';
-		        WS_MULTI_URL = RestServerLink + '/Leaf_Multi';
-		        WS_PSL_URL = RestServerLink + '/Leaf_PSL';
-		        WS_LU_URL = RestServerLink + '/Leaf_LU';
-		        WS_REPORT_URL = RestServerLink + '/Leaf_Report';
-		        WS_REPORT_GIORNALIERA_URL = RestServerLink + '/Leaf_StampaGiornaliera';
-		        WS_PV_URL = RestServerLink + '/Leaf_PV';
-		        WS_RFP_URL = RestServerLink + '/Leaf_RFP';
-		        WS_ADMIN_URL = RestServerLink +'/Leaf_Admin';
-		        WS_TIMBR_URL = RestServerLink +'/Leaf_Timbrature';
-		        WS_EVENTI_URL = RestServerLink +'/Leaf_Eventi';
-		        WS_GIORN_URL = RestServerLink +'/Leaf_Giornaliera';
-		        WS_STORICO_URL = RestServerLink +'/Leaf_Storico';
-		        WS_OP_URL = RestServerLink +'/Leaf_Operations';
-		        WS_NL_URL = RestServerLink + '/Leaf_NL';
-		        WS_TRACK_EXT_URL = RestServerLink + '/Leaf_Tracks';
+//				WS_URL = RestServerLink + '/Leaf_Single';
+//		        WS_MULTI_URL = RestServerLink + '/Leaf_Multi';
+//		        WS_PSL_URL = RestServerLink + '/Leaf_PSL';
+//		        WS_LU_URL = RestServerLink + '/Leaf_LU';
+//		        WS_REPORT_URL = RestServerLink + '/Leaf_Report';
+//		        WS_REPORT_GIORNALIERA_URL = RestServerLink + '/Leaf_StampaGiornaliera';
+//		        WS_PV_URL = RestServerLink + '/Leaf_PV';
+//		        WS_RFP_URL = RestServerLink + '/Leaf_RFP';
+//		        WS_ADMIN_URL = RestServerLink +'/Leaf_Admin';
+//		        WS_TIMBR_URL = RestServerLink +'/Leaf_Timbrature';
+//		        WS_EVENTI_URL = RestServerLink +'/Leaf_Eventi';
+//		        WS_GIORN_URL = RestServerLink +'/Leaf_Giornaliera';
+//		        WS_STORICO_URL = RestServerLink +'/Leaf_Storico';
+//		        WS_OP_URL = RestServerLink +'/Leaf_Operations';
+//		        WS_NL_URL = RestServerLink + '/Leaf_NL';
+//		        WS_TRACK_EXT_URL = RestServerLink + '/Leaf_Tracks';
 		        break;
 			case ENVIRONMENT.DEBUG_VB6:
 			case ENVIRONMENT.DEBUG:
-			case ENVIRONMENT.DEBUG_DIRECT:	
-				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_REPORT_GIORNALIERA_URL = WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = WS_TRACK_EXT_URL = RestServerLink + '/Leaf_Test';
+			case ENVIRONMENT.DEBUG_DIRECT:
+			case ENVIRONMENT.TEST:	
+//				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_REPORT_GIORNALIERA_URL = WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = WS_TRACK_EXT_URL = RestServerLink + '/Leaf_Test';
 				break;
 			case ENVIRONMENT.DEVELOPING:
-				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_REPORT_GIORNALIERA_URL =
-				WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = WS_TRACK_EXT_URL = RestServerLink //+ '/';
+				WS_OPERATION = 
+		        WS_CALENDAR =
+		        WS_CERTIFICATE = 
+		        WS_EVENT = 
+		        WS_LU =
+		        WS_NL = 
+		        WS_PRESENCE = 
+		        WS_PV =
+		        WS_REPORT = 
+		        WS_STAMPING = 
+		        WS_REGISTRY = RestServerLink;
+//				WS_URL = WS_MULTI_URL = WS_PSL_URL = WS_PV_URL = WS_RFP_URL = WS_LU_URL = WS_REPORT_URL = WS_REPORT_GIORNALIERA_URL =
+//				WS_ADMIN_URL = WS_TIMBR_URL = WS_EVENTI_URL = WS_GIORN_URL = WS_STORICO_URL = WS_OP_URL = WS_NL_URL = WS_TRACK_EXT_URL = RestServerLink //+ '/';
 				break;
 		}
 		
